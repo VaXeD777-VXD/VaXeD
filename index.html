@@ -516,3 +516,626 @@ footer{
 </head>
 
 <body>
+
+<!-- AUTH -->
+<div id="authScreen">
+
+  <div class="authBox">
+
+    <div class="logo">Va<span>XeD</span></div>
+    <div class="subtitle">Minecraft Community</div>
+
+    <div class="tabs">
+      <button id="loginTab" class="active" onclick="showAuth('login')">
+        Giriş Yap
+      </button>
+
+      <button id="registerTab" onclick="showAuth('register')">
+        Kayıt Ol
+      </button>
+    </div>
+
+    <!-- LOGIN -->
+    <div id="loginForm">
+
+      <div class="field">
+        <label>Kullanıcı adı</label>
+        <input id="loginUsername" autocomplete="username" placeholder="Kullanıcı adın">
+      </div>
+
+      <div class="field">
+        <label>Şifre</label>
+        <input id="loginPassword" type="password" autocomplete="current-password" placeholder="Şifren">
+      </div>
+
+      <button class="primary" onclick="login()">
+        Giriş Yap
+      </button>
+
+    </div>
+
+    <!-- REGISTER -->
+    <div id="registerForm" class="hidden">
+
+      <div class="field">
+        <label>Kullanıcı adı</label>
+        <input id="registerUsername" placeholder="Kullanıcı adın">
+      </div>
+
+      <div class="field">
+        <label>Discord kullanıcı adı</label>
+        <input id="registerDiscord" placeholder="Discord kullanıcı adın">
+      </div>
+
+      <div class="field">
+        <label>Şifre</label>
+        <input id="registerPassword" type="password" placeholder="Şifren">
+      </div>
+
+      <div class="field">
+        <label>Şifre tekrar</label>
+        <input id="registerPassword2" type="password" placeholder="Şifreni tekrar yaz">
+      </div>
+
+      <button class="primary" onclick="register()">
+        Kayıt Ol
+      </button>
+
+    </div>
+
+    <div class="smallNote">
+      VaXeD topluluk sitesi • Gerçek para işlemi yoktur.
+    </div>
+
+  </div>
+</div>
+
+
+<!-- APP -->
+<div id="app" class="hidden">
+
+<header>
+
+  <div class="headerInner">
+
+    <div class="brand">
+      Va<span>XeD</span>
+    </div>
+
+    <div class="userArea">
+      <span class="userName" id="headerUsername"></span>
+      <button class="logout" onclick="logout()">Çıkış</button>
+    </div>
+
+  </div>
+
+  <nav>
+
+    <button data-page="home" onclick="openPage('home')">🏠 Ana Sayfa</button>
+
+    <button data-page="market" onclick="openPage('market')">🛒 Market</button>
+
+    <button data-page="players" onclick="openPage('players')">👥 Oyuncular</button>
+
+    <button data-page="items" onclick="openPage('items')">📦 Eşyalar</button>
+
+    <button data-page="farms" onclick="openPage('farms')">🌾 Farm</button>
+
+    <button data-page="guides" onclick="openPage('guides')">📖 Rehber</button>
+
+    <button data-page="commands" onclick="openPage('commands')">⌨️ Komutlar</button>
+
+    <button data-page="events" onclick="openPage('events')">🎉 Etkinlik</button>
+
+    <button data-page="codes" onclick="openPage('codes')">🎁 Kodlar</button>
+
+    <button data-page="giveaway" onclick="openPage('giveaway')">🎉 Çekiliş</button>
+
+    <button data-page="achievements" onclick="openPage('achievements')">🏆 Başarımlar</button>
+
+    <button data-page="reports" onclick="openPage('reports')">🚨 Rapor</button>
+
+    <button data-page="scammers" onclick="openPage('scammers')">⚠️ Şüpheliler</button>
+
+    <button data-page="admin" onclick="openPage('admin')">🛡️ Admin</button>
+
+  </nav>
+
+</header>
+
+
+<main>
+
+<!-- HOME -->
+<section id="home" class="page">
+
+  <div class="hero">
+
+    <h1>Va<span>XeD</span></h1>
+
+    <p>
+      Minecraft topluluğu için hazırlanmış modern topluluk platformu.
+      Oyuncular, rehberler, market, etkinlikler ve topluluk araçları tek yerde.
+    </p>
+
+    <div class="buttons">
+
+      <button class="btn primaryBtn" onclick="copyIP()">
+        📋 IP Kopyala
+      </button>
+
+      <button class="btn discord" onclick="openDiscord('vaxed')">
+        💬 VaXeD Discord
+      </button>
+
+      <button class="btn" onclick="openDiscord('kolichub')">
+        💬 KolicHub Discord
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <div class="card serverCard">
+
+    <div>
+
+      <h3>🟣 VaXeD Minecraft</h3>
+
+      <p>Sunucu IP adresi</p>
+
+      <div class="ip">kolichub.net</div>
+
+    </div>
+
+    <button class="btn primaryBtn" onclick="copyIP()">
+      📋 IP Kopyala
+    </button>
+
+  </div>
+
+
+  <h2 class="sectionTitle">✨ Topluluk</h2>
+
+  <div class="grid">
+
+    <div class="card">
+      <div class="icon">👥</div>
+      <h3>Oyuncular</h3>
+      <p>Topluluk oyuncularını keşfet.</p>
+    </div>
+
+    <div class="card">
+      <div class="icon">📖</div>
+      <h3>Rehberler</h3>
+      <p>Farm, PvP ve başlangıç rehberleri.</p>
+    </div>
+
+    <div class="card">
+      <div class="icon">🛒</div>
+      <h3>Market</h3>
+      <p>Topluluk marketlerini görüntüle.</p>
+    </div>
+
+    <div class="card">
+      <div class="icon">🎉</div>
+      <h3>Etkinlikler</h3>
+      <p>Topluluk etkinliklerini takip et.</p>
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- MARKET -->
+<section id="market" class="page">
+
+  <h1>🛒 Market</h1>
+
+  <p style="color:var(--muted);margin-top:8px">
+    Topluluk market ve takas alanları.
+  </p>
+
+  <div class="marketTabs">
+
+    <button class="active" onclick="marketTab('night',this)">
+      🌙 Night Market
+    </button>
+
+    <button onclick="marketTab('player',this)">
+      👤 Player Market
+    </button>
+
+    <button onclick="marketTab('trade',this)">
+      🔄 Trade Center
+    </button>
+
+  </div>
+
+
+  <div id="nightMarket">
+
+    <div class="grid">
+
+      <div class="card product">
+        <span class="tag">Kutu</span>
+        <div class="icon">📦</div>
+        <h3>Kaliteli Kutu</h3>
+        <p>Topluluk içi özel kutu.</p>
+        <div class="price">Discord'dan bilgi al</div>
+      </div>
+
+      <div class="card product">
+        <div class="icon">🎒</div>
+        <h3>Başlangıç Kit Paketi</h3>
+        <p>Yeni oyuncular için topluluk paketi.</p>
+        <div class="price">Discord'dan bilgi al</div>
+      </div>
+
+      <div class="card product">
+        <div class="icon">⚔️</div>
+        <h3>PvP Kit Paketi</h3>
+        <p>PvP odaklı topluluk paketi.</p>
+        <div class="price">Discord'dan bilgi al</div>
+      </div>
+
+      <div class="card product">
+        <div class="icon">🌾</div>
+        <h3>Farm Kit Paketi</h3>
+        <p>Farm oyuncuları için paket.</p>
+        <div class="price">Discord'dan bilgi al</div>
+      </div>
+
+      <div class="card product">
+        <div class="icon">👑</div>
+        <h3>Özel Kit Paketi</h3>
+        <p>Özel topluluk paketi.</p>
+        <div class="price">Discord'dan bilgi al</div>
+      </div>
+
+      <div class="card product">
+        <div class="icon">🎁</div>
+        <h3>Gizemli Kutu</h3>
+        <p>İçeriği sürpriz topluluk kutusu.</p>
+        <div class="price">Discord'dan bilgi al</div>
+      </div>
+
+    </div>
+
+    <div class="card" style="margin-top:15px">
+      ⚠️ Bu web sitesi üzerinden gerçek para veya ödeme işlemi yapılmaz.
+    </div>
+
+  </div>
+
+
+  <div id="playerMarket" class="hidden">
+
+    <div class="formBox">
+
+      <h3>👤 Oyuncu ilanı oluştur</h3>
+
+      <div class="field" style="margin-top:15px">
+        <label>İlan başlığı</label>
+        <input id="listingTitle" placeholder="Örn: Diamond set">
+      </div>
+
+      <div class="field">
+        <label>Detay</label>
+        <textarea id="listingDescription"
+        placeholder="İlan detaylarını yaz..."></textarea>
+      </div>
+
+      <button class="btn primaryBtn" onclick="addListing()">
+        İlan Oluştur
+      </button>
+
+    </div>
+
+    <div class="grid" id="listingGrid" style="margin-top:18px"></div>
+
+  </div>
+
+
+  <div id="tradeCenter" class="hidden">
+
+    <div class="formBox">
+
+      <h3>🔄 Takas teklifi oluştur</h3>
+
+      <div class="field" style="margin-top:15px">
+        <label>Aradığın eşya</label>
+        <input id="tradeWant" placeholder="Örn: Netherite">
+      </div>
+
+      <div class="field">
+        <label>Teklifin</label>
+        <input id="tradeOffer" placeholder="Örn: Diamond set">
+      </div>
+
+      <button class="btn primaryBtn" onclick="addTrade()">
+        Teklif Oluştur
+      </button>
+
+    </div>
+
+    <div class="grid" id="tradeGrid" style="margin-top:18px"></div>
+
+  </div>
+
+</section>
+
+
+<!-- PLAYERS -->
+<section id="players" class="page">
+
+  <h1>👥 Oyuncular</h1>
+
+  <div class="grid" style="margin-top:18px">
+
+    <div class="card">
+
+      <div class="icon">👤</div>
+
+      <h3>Topluluk Oyuncusu</h3>
+
+      <p>
+        Topluluk oyuncuları hakkında bilgi almak için Discord'a katılabilirsin.
+      </p>
+
+    </div>
+
+    <div class="card">
+
+      <div class="icon">🟣</div>
+
+      <h3>VaXeD Community</h3>
+
+      <p>
+        Topluluk üyeleri için ortak alan.
+      </p>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- ITEMS -->
+<section id="items" class="page">
+
+  <h1>📦 Eşyalar</h1>
+
+  <div class="grid" style="margin-top:18px">
+
+    <div class="card">
+      <div class="icon">💎</div>
+      <h3>Diamond</h3>
+      <p>Değerli kaynak.</p>
+    </div>
+
+    <div class="card">
+      <div class="icon">🟪</div>
+      <h3>Netherite</h3>
+      <p>End-game ekipmanlarında kullanılan kaynak.</p>
+    </div>
+
+    <div class="card">
+      <div class="icon">🧱</div>
+      <h3>Redstone</h3>
+      <p>Redstone sistemlerinde kullanılır.</p>
+    </div>
+
+    <div class="card">
+      <div class="icon">🌾</div>
+      <h3>Farm Ürünleri</h3>
+      <p>Çeşitli farm ürünleri.</p>
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- FARMS -->
+<section id="farms" class="page">
+
+  <h1>🌾 Farm Rehberleri</h1>
+
+  <div class="grid" style="margin-top:18px">
+
+    <div class="card">
+      <div class="icon">🎋</div>
+      <h3>Bamboo Farm</h3>
+      <p>Bamboo üretimi için temel farm sistemi.</p>
+    </div>
+
+    <div class="card">
+      <div class="icon">🌾</div>
+      <h3>Wheat Farm</h3>
+      <p>Basit buğday farmı.</p>
+    </div>
+
+    <div class="card">
+      <div class="icon">🦴</div>
+      <h3>Bone Farm</h3>
+      <p>Bone ve bone meal üretimi.</p>
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- GUIDES -->
+<section id="guides" class="page">
+
+  <h1>📖 Rehberler</h1>
+
+  <div class="grid" style="margin-top:18px">
+
+    <div class="card">
+      <div class="icon">⚔️</div>
+      <h3>PvP Rehberi</h3>
+      <p>Temel PvP taktikleri ve ekipman bilgileri.</p>
+    </div>
+
+    <div class="card">
+      <div class="icon">🌾</div>
+      <h3>Farm Rehberi</h3>
+      <p>Farm kurulumları hakkında bilgiler.</p>
+    </div>
+
+    <div class="card">
+      <div class="icon">🏠</div>
+      <h3>Başlangıç Rehberi</h3>
+      <p>Yeni oyuncular için temel bilgiler.</p>
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- COMMANDS -->
+<section id="commands" class="page">
+
+  <h1>⌨️ Komutlar</h1>
+
+  <div class="card" style="margin-top:18px">
+
+    <p><b>/spawn</b> — Spawn bölgesine gider.</p>
+    <p><b>/home</b> — Ev sistemini açar.</p>
+    <p><b>/warp</b> — Warp listesini açar.</p>
+    <p><b>/help</b> — Yardım menüsünü açar.</p>
+
+  </div>
+
+</section>
+
+
+<!-- EVENTS -->
+<section id="events" class="page">
+
+  <h1>🎉 Etkinlikler</h1>
+
+  <div class="grid" style="margin-top:18px">
+
+    <div class="card">
+      <div class="icon">⚔️</div>
+      <h3>PvP Etkinliği</h3>
+      <p>Topluluk PvP etkinliği.</p>
+    </div>
+
+    <div class="card">
+      <div class="icon">🏆</div>
+      <h3>Turnuva</h3>
+      <p>Topluluk turnuvaları.</p>
+    </div>
+
+    <div class="card">
+      <div class="icon">🎁</div>
+      <h3>Topluluk Etkinliği</h3>
+      <p>Discord üzerinden duyurulur.</p>
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- CODES -->
+<section id="codes" class="page">
+
+  <h1>🎁 Kodlar</h1>
+
+  <div class="card" style="margin-top:18px">
+
+    <h3>Aktif Kodlar</h3>
+
+    <p style="margin-top:10px">
+      Şu anda yayınlanmış kod bulunmuyor.
+    </p>
+
+    <p style="margin-top:10px">
+      Yeni kodlar Discord üzerinden duyurulabilir.
+    </p>
+
+  </div>
+
+</section>
+
+
+<!-- GIVEAWAY -->
+<section id="giveaway" class="page">
+
+  <h1>🎉 Çekiliş</h1>
+
+  <div class="card" style="margin-top:18px">
+
+    <div class="icon">🎁</div>
+
+    <h3>VaXeD Topluluk Çekilişleri</h3>
+
+    <p>
+      Aktif çekilişler ve katılım şartları Discord üzerinden paylaşılır.
+    </p>
+
+    <button class="btn discord"
+    style="margin-top:15px"
+    onclick="openDiscord('vaxed')">
+      Discord'a Git
+    </button>
+
+  </div>
+
+</section>
+
+
+<!-- ACHIEVEMENTS -->
+<section id="achievements" class="page">
+
+  <h1>🏆 Başarımlar</h1>
+
+  <div class="grid" style="margin-top:18px">
+
+    <div class="card">
+      <div class="icon">🌱</div>
+      <h3>İlk Adım</h3>
+      <p>VaXeD topluluğuna katıl.</p>
+    </div>
+
+    <div class="card">
+      <div class="icon">💬</div>
+      <h3>Topluluk</h3>
+      <p>Discord topluluğuna katıl.</p>
+    </div>
+
+    <div class="card">
+      <div class="icon">🛒</div>
+      <h3>Tüccar</h3>
+      <p>Bir oyuncu ilanı oluştur.</p>
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- REPORTS -->
+<section id="reports" class="page">
+
+  <h1>🚨 Oyuncu Raporla</h1>
+
+  <p style="color:var(--muted);margin:8px 0 20px">
+    Şüpheli davranışları topluluk yönetimine bildirebilirsin.
+  </p>
+
+  <div class="formBox">
+
+    <div class="field">
+      <label>Oyuncu adı</label>
+      <input id="reportPlayer" placeholde
