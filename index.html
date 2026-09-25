@@ -1,206 +1,81 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="tr">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>VaXeD | KolicHub Topluluk Merkezi</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#09070f">
+<title>VaXeD | KolicHub</title>
 <style>
-:root{--bg:#08080d;--panel:#11111a;--panel2:#171522;--purple:#8b5cf6;--purple2:#a855f7;--text:#f5f3ff;--muted:#aaa4bd;--line:#292338;--danger:#ef4444;--ok:#22c55e}
-*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:radial-gradient(circle at 50% -10%,#24104d 0,#08080d 38%);color:var(--text);font-family:Inter,Arial,sans-serif;min-height:100vh}
-button,input,textarea,select{font:inherit}button,a{touch-action:manipulation}.app{min-height:100vh}
-header{position:sticky;top:0;z-index:20;background:rgba(8,8,13,.9);backdrop-filter:blur(12px);border-bottom:1px solid var(--line);padding:13px 16px}
-.header-inner{max-width:1250px;margin:auto;display:flex;align-items:center;justify-content:space-between;gap:12px}
-.logo{font-size:21px;font-weight:900;letter-spacing:.5px}.logo span{color:var(--purple2)}
-.admin-pill{font-size:11px;color:#d9ccff;border:1px solid #4c3675;padding:6px 9px;border-radius:999px}
-.layout{max-width:1250px;margin:auto;display:flex;gap:16px;padding:16px}
-.sidebar{width:215px;flex:none;background:rgba(17,17,26,.82);border:1px solid var(--line);border-radius:18px;padding:10px;height:max-content;position:sticky;top:78px}
-.nav{display:block;width:100%;border:0;background:none;color:var(--muted);text-align:left;padding:10px 11px;border-radius:11px;cursor:pointer;margin:2px 0}.nav:hover,.nav.active{background:#201735;color:#fff}
-main{min-width:0;flex:1}.page{display:none}.page.active{display:block}
-.hero,.card{background:linear-gradient(145deg,rgba(24,20,36,.96),rgba(13,13,20,.96));border:1px solid var(--line);border-radius:18px;padding:18px;box-shadow:0 8px 30px rgba(0,0,0,.18)}
-.hero{margin-bottom:14px}.hero h1,.hero h2,.card h3{margin:0 0 8px}.muted{color:var(--muted)}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}.card p{color:#d4d0df;line-height:1.5}.price{color:#c4a7ff;font-weight:800}.tag{display:inline-block;padding:4px 8px;border:1px solid #4b3b6b;border-radius:999px;color:#d9caff;font-size:12px;margin:3px 0}
-.server{margin-top:14px}.ip{font-size:20px;font-weight:900;padding:14px 0;color:#d8c7ff}.actions{display:flex;flex-wrap:wrap;gap:8px;align-items:center}.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;border:1px solid #3a304d;background:#171421;color:#fff;padding:10px 13px;border-radius:11px;text-decoration:none;cursor:pointer}.btn:hover{border-color:#7250aa}.btn.primary{background:linear-gradient(135deg,#7c3aed,#a855f7);border-color:#8b5cf6}.btn.danger{background:#30131a;border-color:#6b202d;color:#ffb5bf}.btn.ok{background:#102a1b;border-color:#21683b;color:#a7f3c1}
-.field{margin-bottom:11px}.field label{display:block;color:#c9c2d7;font-size:13px;margin-bottom:6px}input,textarea,select{width:100%;background:#0d0c13;color:#fff;border:1px solid #332b43;border-radius:10px;padding:11px;outline:none}input:focus,textarea:focus{border-color:#7c3aed}textarea{min-height:100px;resize:vertical}
-.empty{text-align:center;color:var(--muted);padding:25px;border:1px dashed #3a304d;border-radius:14px}.bottom{display:none}
-.modal{position:fixed;inset:0;background:rgba(0,0,0,.72);z-index:50;display:none;align-items:center;justify-content:center;padding:15px}.modalbox{width:min(560px,100%);max-height:90vh;overflow:auto;background:#11111a;border:1px solid #403452;border-radius:18px;padding:18px}
-.toast{position:fixed;left:50%;bottom:22px;transform:translateX(-50%);background:#1e1730;border:1px solid #6b4b9a;padding:11px 15px;border-radius:12px;z-index:100;display:none}
-.purchase-card{cursor:pointer;transition:.15s}.purchase-card:hover{transform:translateY(-2px);border-color:#754db2}
-.small{font-size:12px;color:var(--muted)}.danger-text{color:#ff8c9b}.success-text{color:#91f0b0}
-hr{border:0;border-top:1px solid var(--line);margin:14px 0}
-@media(max-width:800px){.layout{padding:10px;display:block}.sidebar{display:none}.bottom{position:fixed;display:grid;grid-template-columns:repeat(5,1fr);bottom:0;left:0;right:0;background:rgba(10,9,15,.96);backdrop-filter:blur(12px);border-top:1px solid var(--line);z-index:30;padding:7px 4px}.bottom button{border:0;background:none;color:#aaa4bd;font-size:10px;padding:4px}.bottom button.active{color:#c8a8ff}.bottom .ico{font-size:17px}.grid{grid-template-columns:1fr}.hero,.card{border-radius:15px;padding:15px}main{padding-bottom:75px}}
+:root{--bg:#08070d;--panel:#11101a;--panel2:#171323;--line:#2b2340;--purple:#8b5cf6;--purple2:#c084fc;--text:#f7f3ff;--muted:#aaa2bb;--red:#ef4444;--green:#22c55e}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:radial-gradient(circle at 50% -15%,#29104e 0,#08070d 42%);color:var(--text);font-family:Arial,Helvetica,sans-serif;min-height:100vh}button,input,textarea{font:inherit}a{color:inherit;text-decoration:none}
+header{position:sticky;top:0;z-index:20;background:rgba(8,7,13,.94);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}.head{max-width:1250px;margin:auto;padding:14px 16px;display:flex;justify-content:space-between;align-items:center;gap:12px}.logo{font-weight:900;font-size:21px}.logo b{color:var(--purple2)}.pill{border:1px solid #513678;border-radius:999px;padding:7px 10px;color:#d9c7ff;font-size:12px;white-space:nowrap}
+.layout{max-width:1250px;margin:auto;display:flex;gap:15px;padding:15px}.side{width:220px;flex:0 0 220px;background:#0f0e17;border:1px solid var(--line);border-radius:17px;padding:9px;height:max-content;position:sticky;top:78px}.nav{width:100%;border:0;background:transparent;color:var(--muted);padding:10px;border-radius:10px;text-align:left;cursor:pointer;margin:2px 0}.nav.active,.nav:hover{background:#211633;color:#fff}main{min-width:0;flex:1}.page{display:none}.page.active{display:block}
+.hero,.card{background:linear-gradient(145deg,rgba(24,19,35,.97),rgba(13,12,19,.97));border:1px solid var(--line);border-radius:17px;padding:17px;box-shadow:0 7px 28px #0003}.hero{margin-bottom:13px}.hero h1,.hero h2,.card h3{margin:0 0 8px}.muted{color:var(--muted)}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}.card p{line-height:1.5;color:#d8d2e2}.actions{display:flex;gap:8px;flex-wrap:wrap;align-items:center}.btn{display:inline-flex;justify-content:center;align-items:center;gap:6px;padding:10px 13px;border-radius:11px;border:1px solid #403451;background:#171421;color:#fff;cursor:pointer}.btn.primary{background:linear-gradient(135deg,#7c3aed,#a855f7);border-color:#9b65ff}.btn.danger{background:#30131a;border-color:#6e2632;color:#ffb9c2}.btn.ok{background:#10291a;border-color:#256b3e;color:#adf3c5}.ip{font-size:20px;font-weight:900;color:#dccbff;padding:10px 0}.tag{display:inline-block;border:1px solid #4b3a69;border-radius:999px;padding:4px 8px;font-size:12px;color:#dac9ff}.empty{text-align:center;color:var(--muted);padding:25px;border:1px dashed #403451;border-radius:14px}.field{margin-bottom:11px}.field label{display:block;font-size:13px;color:#cfc6dc;margin-bottom:6px}input,textarea{width:100%;padding:11px;border-radius:10px;border:1px solid #382d4a;background:#0c0b12;color:#fff;outline:none}textarea{min-height:100px;resize:vertical}input:focus,textarea:focus{border-color:var(--purple)}hr{border:0;border-top:1px solid var(--line);margin:14px 0}.small{font-size:12px;color:var(--muted)}
+.bottom{display:none}.modal{display:none;position:fixed;inset:0;z-index:50;background:#000b;align-items:center;justify-content:center;padding:15px}.modal.open{display:flex}.modalbox{width:min(570px,100%);max-height:90vh;overflow:auto;background:#11101a;border:1px solid #49375e;border-radius:18px;padding:18px}.toast{display:none;position:fixed;z-index:100;left:50%;bottom:22px;transform:translateX(-50%);padding:11px 15px;border:1px solid #694c91;background:#201632;border-radius:12px}
+@media(max-width:800px){.layout{display:block;padding:10px}.side{display:none}main{padding-bottom:76px}.bottom{display:grid;position:fixed;z-index:30;left:0;right:0;bottom:0;grid-template-columns:repeat(5,1fr);padding:7px 3px;background:rgba(10,9,15,.97);border-top:1px solid var(--line)}.bottom button{border:0;background:transparent;color:var(--muted);font-size:10px;padding:3px}.bottom button.active{color:#d0b0ff}.bottom span{font-size:17px}.grid{grid-template-columns:1fr}.hero,.card{padding:15px;border-radius:15px}}
 </style>
 </head>
 <body>
-<div class="app">
-<header><div class="header-inner"><div class="logo">💜 <span>VaXeD</span> / KolicHub</div><div id="adminStatus" class="admin-pill">Topluluk Merkezi</div></div></header>
-
-<div class="layout">
-<aside class="sidebar" id="side"></aside>
-<main id="main"></main>
-</div>
-<nav class="bottom" id="bottom"></nav>
-</div>
-
-<div class="modal" id="modal"><div class="modalbox" id="modalbox"></div></div>
-<div class="toast" id="toast"></div>
-
+<header><div class="head"><div class="logo">💜 <b>VaXeD</b> / KolicHub</div><div class="pill" id="status">Topluluk Merkezi</div></div></header>
+<div class="layout"><aside class="side" id="side"></aside><main id="main"></main></div><nav class="bottom" id="bottom"></nav>
+<div class="modal" id="modal"><div class="modalbox" id="modalbox"></div></div><div class="toast" id="toast"></div>
 <script>
-const STORAGE_KEY="vaxed_site_data";
-const ADMIN_PASSWORD="V6559";
-const IP="kolichub.net";
-
-const nav=[
-["home","🏠 Ana Sayfa"],["purchases","🎁 Satın Alımlar"],["night","🌙 Gece Pazarı"],["market","🛒 Oyuncu Pazarı"],
-["trade","🔄 Trade Merkezi"],["players","👥 Oyuncular"],["items","💎 Eşyalar"],["calculators","🧮 Hesaplayıcılar"],
-["farm","🌾 Farm Rehberleri"],["guides","📚 Rehberler"],["commands","⌨️ Komutlar"],["events","📅 Etkinlikler"],
-["codes","🎟️ Kodlar"],["giveaway","🎉 Çekilişler"],["achievements","🏆 Başarımlar"],["reports","🚨 Bildirimler"],
-["discord","💬 Discord"],["settings","⚙️ Ayarlar"],["admin","🛡️ Admin"]
+'use strict';
+const KEY='vaxed_kolichub_v2', ADMIN='V6559', IP='kolichub.net';
+const NAV=[
+ ['home','🏠 Ana Sayfa'],['purchases','🎁 Satın Alımlar'],['night','🌙 Gece Pazarı'],['market','🛒 Oyuncu Pazarı'],['trade','🔄 Trade Merkezi'],['players','👥 Oyuncular'],['items','💎 Eşyalar'],['calculators','🧮 Hesaplayıcılar'],['farm','🌾 Farm Rehberleri'],['guides','📚 Rehberler'],['commands','⌨️ Komutlar'],['events','📅 Etkinlikler'],['codes','🎟️ Kodlar'],['giveaway','🎉 Çekilişler'],['achievements','🏆 Başarımlar'],['reports','🚨 Bildirimler'],['discord','💬 Discord'],['settings','⚙️ Ayarlar'],['admin','🛡️ Admin']
 ];
-
-const defaultPurchases=[
-{id:1,name:"Gizemli Kutu",icon:"🎁",commands:["RaveXismc","korkunckamyon"]},
-{id:2,name:"Random Kit Kutusu",icon:"🎒",commands:["RaveXismc","korkunckamyon"]},
-{id:3,name:"Kaliteli Kutu",icon:"💎",commands:["RaveXismc","korkunckamyon"]},
-{id:4,name:"Kalitesiz Kutu",icon:"🗑️",commands:["RaveXismc","korkunckamyon"]},
-{id:5,name:"Random Kutu",icon:"🎲",commands:["RaveXismc","korkunckamyon"]}
+const DEFAULT_BOXES=[
+ {id:1,name:'Gizemli Kutu',icon:'🎁',commands:['RaveXismc','korkunckamyon']},
+ {id:2,name:'Random Kit Kutusu',icon:'🎒',commands:['RaveXismc','korkunckamyon']},
+ {id:3,name:'Kaliteli Kutu',icon:'💎',commands:['RaveXismc','korkunckamyon']},
+ {id:4,name:'Kalitesiz Kutu',icon:'🗑️',commands:['RaveXismc','korkunckamyon']},
+ {id:5,name:'Random Kutu',icon:'🎲',commands:['RaveXismc','korkunckamyon']}
 ];
-
-const demo={
-night:[["💎","Elmas Paketi","75M"],["🟩","Zümrüt Sandığı","120M"],["⬛","Obsidyen Seti","50M"]],
-players:[["Zheckolic","Aktif"],["Caner","Aktif"],["dryosun","Aktif"],["an0x713","Aktif"]],
-items:[["💎","Diamond","Maden","1.2M"],["🟩","Emerald","Maden","3.9M"],["⬛","Obsidian","Blok","500K"],["🟨","Gold Ingot","Maden","250K"]]
-};
-
-let data={
-trades:[],market:[],reports:[],scammers:[],
-purchases:defaultPurchases.map(x=>({...x,commands:[...x.commands]}))
-};
-let isAdmin=false;
-
-function loadData(){
- try{
-  const saved=JSON.parse(localStorage.getItem(STORAGE_KEY)||"null");
-  if(saved){
-   data={...data,...saved};
-   if(!Array.isArray(data.purchases)||!data.purchases.length)data.purchases=defaultPurchases;
-  }
- }catch(e){}
-}
-function save(){localStorage.setItem(STORAGE_KEY,JSON.stringify(data))}
-function esc(v){
- return String(v??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[m]));
-}
-function escJS(v){return String(v??"").replace(/\\/g,"\\\\").replace(/'/g,"\\'").replace(/\n/g,"\\n").replace(/\r/g,"");}
-function toast(t){const e=document.getElementById("toast");e.textContent=t;e.style.display="block";clearTimeout(window._toast);window._toast=setTimeout(()=>e.style.display="none",2300)}
-function moneyText(n){return new Intl.NumberFormat("tr-TR").format(n)+" Coin"}
-function card(title,body){
- return `<div class="card"><h3>${title}</h3>${body}</div>`;
-}
-function page(id){
- document.querySelectorAll(".page").forEach(x=>x.classList.remove("active"));
- document.getElementById("p-"+id)?.classList.add("active");
- document.querySelectorAll("[data-page]").forEach(x=>x.classList.toggle("active",x.dataset.page===id));
- scrollTo(0,0);
-}
-function openModal(title,body){
- document.getElementById("modalbox").innerHTML=
- `<div class="actions" style="justify-content:space-between"><h2>${title}</h2><button class="btn" onclick="closeModal()">✕</button></div>${body}`;
- document.getElementById("modal").style.display="flex";
-}
-function closeModal(){document.getElementById("modal").style.display="none"}
-function copyText(t){
- if(navigator.clipboard) navigator.clipboard.writeText(t).then(()=>toast("Kopyalandı")).catch(()=>fallbackCopy(t));
- else fallbackCopy(t);
-}
-function fallbackCopy(t){
- const x=document.createElement("textarea");x.value=t;document.body.appendChild(x);x.select();document.execCommand("copy");x.remove();toast("Kopyalandı");
-}
-function copyIP(){copyText(IP)}
-function copyCommand(c){copyText("/Pay "+c)}
-function navRender(){
- const html=nav.map(x=>`<button class="nav" data-page="${x[0]}" onclick="page('${x[0]}')">${x[1]}</button>`).join("");
- document.getElementById("side").innerHTML=html;
- document.getElementById("bottom").innerHTML=nav.slice(0,5).map(x=>{
-  const p=x[1].split(" ");return `<button data-page="${x[0]}" onclick="page('${x[0]}')"><span class="ico">${p[0]}</span><br>${p.slice(1).join(" ")}</button>`;
- }).join("");
-}
-
+let data={trades:[],market:[],reports:[],scammers:[],purchases:clone(DEFAULT_BOXES)};
+let admin=false;
+function clone(x){return JSON.parse(JSON.stringify(x))}
+function esc(x){return String(x??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]))}
+function escJS(x){return String(x??'').replace(/\\/g,'\\\\').replace(/'/g,"\\'").replace(/\n/g,'\\n').replace(/\r/g,'')}
+function load(){try{const x=JSON.parse(localStorage.getItem(KEY));if(x&&typeof x==='object'){data={...data,...x};for(const k of ['trades','market','reports','scammers','purchases'])if(!Array.isArray(data[k]))data[k]=k==='purchases'?clone(DEFAULT_BOXES):[];if(!data.purchases.length)data.purchases=clone(DEFAULT_BOXES)}}catch(e){console.warn('localStorage okunamadı',e)}}
+function save(){localStorage.setItem(KEY,JSON.stringify(data))}
+function toast(t){const e=document.getElementById('toast');e.textContent=t;e.style.display='block';clearTimeout(window.__toast);window.__toast=setTimeout(()=>e.style.display='none',2200)}
+function card(title,body){return '<div class="card"><h3>'+title+'</h3>'+body+'</div>'}
+function page(id){document.querySelectorAll('.page').forEach(x=>x.classList.remove('active'));const p=document.getElementById('p-'+id);if(p)p.classList.add('active');document.querySelectorAll('[data-page]').forEach(x=>x.classList.toggle('active',x.dataset.page===id));window.scrollTo(0,0)}
+function nav(){const html=NAV.map(n=>'<button class="nav" data-page="'+n[0]+'" onclick="page(\''+n[0]+'\')">'+n[1]+'</button>').join('');document.getElementById('side').innerHTML=html;document.getElementById('bottom').innerHTML=NAV.slice(0,5).map(n=>{const a=n[1].split(' ');return '<button data-page="'+n[0]+'" onclick="page(\''+n[0]+'\')"><span>'+a[0]+'</span><br>'+a.slice(1).join(' ')+'</button>'}).join('')}
+function openModal(title,body){document.getElementById('modalbox').innerHTML='<div class="actions" style="justify-content:space-between"><h2>'+title+'</h2><button class="btn" onclick="closeModal()">✕</button></div>'+body;document.getElementById('modal').classList.add('open')}
+function closeModal(){document.getElementById('modal').classList.remove('open')}
+function copy(t){if(navigator.clipboard){navigator.clipboard.writeText(t).then(()=>toast('Kopyalandı')).catch(()=>fallback(t))}else fallback(t)}
+function fallback(t){const a=document.createElement('textarea');a.value=t;document.body.appendChild(a);a.select();try{document.execCommand('copy')}catch(e){}a.remove();toast('Kopyalandı')}
+function copyIP(){copy(IP)}
+function copyPay(x){copy('/Pay '+x)}
 function render(){
- navRender();
- let h="";
- h+=`<section class="page active" id="p-home">
- <div class="hero"><h1>💜 VaXeD KolicHub</h1><p class="muted">Bağımsız Minecraft topluluk merkezi.</p>
- <div class="card server"><h2>🎮 KolicHub</h2><div class="ip">🌐 ${IP}</div>
- <div class="actions"><button class="btn primary" onclick="copyIP()">📋 IP KOPYALA</button>
- <a class="btn" href="https://discord.gg/koluchub" target="_blank" rel="noopener">💬 KOLICHUB DISCORD</a>
- <a class="btn" href="https://discord.gg/VaXeD" target="_blank" rel="noopener">💜 VAXED DISCORD</a></div></div></div>
- <div class="grid">
- ${card("🌙 Gece Pazarı",demo.night.map(x=>`<p>${x[0]} <b>${x[1]}</b> — <span class="price">${x[2]}</span></p>`).join(""))}
- ${card("🔄 Son Trade'ler",data.trades.length?data.trades.slice(-4).reverse().map(t=>`<p><b>${esc(t.ign)}</b> ↔ ${esc(t.itemWanted)}</p>`).join(""):"<p>Henüz trade yok.</p>")}
- ${card("👥 Topluluk",demo.players.map((x,i)=>`<p>#${i+1} ${x[0]} — ${x[1]}</p>`).join(""))}
- ${card("📊 Bilgi","<p>Site tarafındaki topluluk ilanları, trade kayıtları ve raporlar localStorage'da tutulur.</p>")}
- </div></section>`;
-
- h+=`<section class="page" id="p-purchases"><div class="hero"><h1>🎁 Satın Alımlar</h1><p class="muted">Kutuyu seç, ödeme komutlarını gör. Gerçek ödeme bu site üzerinden yapılmaz.</p></div>
- <div class="grid">${data.purchases.length?data.purchases.map(p=>`<div class="card purchase-card" onclick="purchaseDetails(${p.id})"><h3>${esc(p.icon)} ${esc(p.name)}</h3><p class="muted">🎫 Satın almak için ticket açınız.</p><button class="btn primary">Detayları Gör</button></div>`).join(""):"<div class='empty'>Henüz kutu eklenmedi.</div>"}</div>
- <div class="empty" style="margin-top:15px;">🎫 Satın alım veya destek için <strong>lütfen ticket açınız.</strong></div>
- </section>`;
-
- h+=`<section class="page" id="p-night"><div class="hero"><h1>🌙 Gece Pazarı</h1><p class="muted">Topluluk bilgilendirme alanı.</p></div><div class="grid">${demo.night.map(x=>card(x[0]+" "+x[1],`<p>Fiyat: <span class="price">${x[2]}</span></p><span class="tag">Gece Pazarı</span>`)).join("")}</div></section>`;
-
- h+=`<section class="page" id="p-market"><div class="hero"><h1>🛒 Oyuncu Pazarı</h1><button class="btn primary" onclick="marketForm()">➕ İlan Ekle</button></div>
- <div class="grid">${data.market.length?data.market.map((m,i)=>card("🛒 "+esc(m.item),`<p>${esc(m.description)}</p><span class="tag">${esc(m.date)}</span><br><button class="btn danger" onclick="deleteMarket(${i})">Sil</button>`)).join(""):"<div class='empty'>Henüz pazar ilanı yok.</div>"}</div></section>`;
-
- h+=`<section class="page" id="p-trade"><div class="hero"><h1>🔄 Trade Merkezi</h1><p class="muted">Trade ilanı oluşturmak için sadece IGN ve Discord adın istenir.</p><button class="btn primary" onclick="tradeForm()">➕ Trade İlanı</button></div>
- <div class="grid">${data.trades.length?data.trades.map((t,i)=>card("🔄 "+esc(t.ign),`<p>💬 Discord: <b>${esc(t.discord)}</b></p><p>📦 Veriyor: ${esc(t.itemGiven)}</p><p>🎯 İstiyor: ${esc(t.itemWanted)}</p><span class="tag">${esc(t.date)}</span><br><button class="btn danger" onclick="deleteTrade(${i})">Sil</button>`)).join(""):"<div class='empty'>Henüz trade ilanı yok.</div>"}</div></section>`;
-
- h+=`<section class="page" id="p-players"><div class="hero"><h1>👥 Oyuncular</h1><input placeholder="Oyuncu ara..." oninput="filterCards(this.value,'playergrid')"></div><div class="grid" id="playergrid">${demo.players.map(x=>card("👤 "+x[0],`<span class="tag">${x[1]}</span>`)).join("")}</div></section>`;
-
- h+=`<section class="page" id="p-items"><div class="hero"><h1>💎 Eşyalar</h1></div><div class="grid">${demo.items.map(x=>card(`${x[0]} ${x[1]}`,`<p>Tür: ${x[2]}</p><span class="tag">${x[3]}</span>`)).join("")}</div></section>`;
-
- h+=`<section class="page" id="p-calculators"><div class="hero"><h1>🧮 Hesaplayıcılar</h1></div><div class="grid">
- ${card("📦 Stack Hesaplayıcı",`<div class="field"><label>Toplam eşya</label><input id="stackIn" type="number" placeholder="128"></div><button class="btn primary" onclick="calcStack()">Hesapla</button><p id="stackOut"></p>`)}
- ${card("⏱️ Süre Hesaplayıcı",`<div class="field"><label>Dakika</label><input id="timeIn" type="number" placeholder="60"></div><button class="btn primary" onclick="calcTime()">Hesapla</button><p id="timeOut"></p>`)}
- </div></section>`;
-
- h+=`<section class="page" id="p-farm"><div class="hero"><h1>🌾 Farm Rehberleri</h1></div><div class="grid">${["Kelp Farmı","Bambu Farmı","Kemik Tozu Farmı","Demir Farmı"].map(x=>card("🌾 "+x,`<p>Gerekli materyaller ve kurulum adımları.</p><button class="btn" onclick="toast('Rehber açıldı')">Rehberi Aç</button>`)).join("")}</div></section>`;
-
- h+=`<section class="page" id="p-guides"><div class="hero"><h1>📚 Rehberler</h1></div><div class="grid">${["🌱 Başlangıç","🔄 Takas","🌾 Farming","🛒 Pazar","👥 Topluluk","🛡️ Güvenlik"].map(x=>card(x,`<p class="muted">Topluluk bilgilendirme rehberi.</p><button class="btn" onclick="toast('Rehber açıldı')">Oku</button>`)).join("")}</div></section>`;
-
- h+=`<section class="page" id="p-commands"><div class="hero"><h1>⌨️ Komutlar</h1><input placeholder="Komut ara..." oninput="filterCards(this.value,'cmdgrid')"></div><div class="grid" id="cmdgrid">${[["/spawn","Başlangıç noktasına git"],["/home","Ev noktasını kullan"],["/shop","Mağazayı aç"],["/ah","Oyuncu pazarını aç"]].map(x=>card(`<span class="tag">${x[0]}</span>`,`<p>${x[1]}</p><button class="btn" onclick="copyText('${escJS(x[0])}')">Kopyala</button>`)).join("")}</div></section>`;
-
- h+=`<section class="page" id="p-events"><div class="hero"><h1>📅 Etkinlikler</h1></div><div class="grid">${["Topluluk Madencilik Günü","KolicHub Takas Festivali"].map((x,i)=>card(x,`<p>Topluluk etkinliği.</p><p>📅 ${i?"01.10.2026 → 05.10.2026":"28.09.2026 → 30.09.2026"}</p><span class="tag">${i?"Yakında":"Aktif"}</span>`)).join("")}</div></section>`;
-
- h+=`<section class="page" id="p-codes"><div class="hero"><h1>🎟️ Kodlar</h1></div><div class="grid">${[["KOLIC2026","Topluluk kodu","Aktif"],["VAXED2026","Profil rozeti","Aktif"],["OLD2025","Eski kod","Süresi doldu"]].map(x=>card(x[0],`<p>${x[1]}</p><span class="tag">${x[2]}</span><br><button class="btn" onclick="copyText('${x[0]}')">Kopyala</button>`)).join("")}</div></section>`;
-
- h+=`<section class="page" id="p-giveaway"><div class="hero"><h1>🎉 Çekilişler</h1><p>Katılım ücretsizdir. Gerçek para veya ödeme yoktur.</p></div><div class="grid">${card("🌟 Gizemli Kutu","🎁 Ücretsiz topluluk çekilişi<br><br><button class='btn primary' onclick=\"toast('Çekilişe katılım kaydedildi')\">Katıl</button>")}${card("💜 KolicHub Rozeti","🎁 Profil ödülü<br><br><button class='btn primary' onclick=\"toast('Çekilişe katılım kaydedildi')\">Katıl</button>")}</div></section>`;
-
- h+=`<section class="page" id="p-achievements"><div class="hero"><h1>🏆 Başarımlar</h1></div><div class="grid">${["İlk Takas","İlk İlan","10 Takas","100 Takas","Farm Ustası","Topluluk Üyesi","Gece Pazarı Ziyaretçisi"].map(x=>card("🏅 "+x,`<p>Topluluk başarımı.</p><button class="btn" onclick="toast('Başarım bilgisi gösterildi')">Görüntüle</button>`)).join("")}</div></section>`;
-
- h+=`<section class="page" id="p-reports"><div class="hero"><h1>🚨 Dolandırıcı Bildirimleri</h1><p>Rapor gönderilmesi kişiyi otomatik olarak scammer ilan etmez.</p><button class="btn primary" onclick="reportForm()">➕ Oyuncu Bildir</button><button class="btn" onclick="scammerForm()">➕ Scammer Ekle</button></div>
- <div class="grid"><div class="card"><h3>🚨 Scammer Listesi</h3>${data.scammers.length?data.scammers.map((s,i)=>`<p>⚠️ <b>${esc(s.user)}</b> — ${esc(s.reason||"Topluluk bildirimi")}<br><span class="small">${esc(s.date)}</span></p>`).join(""):"<div class='empty'>Scammer listesi başlangıçta boş.</div>"}</div>
- <div class="card"><h3>📨 Son Bildirimler</h3>${data.reports.length?data.reports.slice().reverse().map(r=>`<p><b>${esc(r.user)}</b> — ${esc(r.reason)}<br><span class="small">Kanıt: ${r.evidenceName?esc(r.evidenceName):"Yok"} · ${esc(r.date)}</span></p>`).join(""):"<div class='empty'>Henüz bildirim yok.</div>"}</div></div></section>`;
-
- h+=`<section class="page" id="p-discord"><div class="hero"><h1>💬 Discord</h1></div><div class="grid">${card("💜 VaXeD",`<a class="btn primary" href="https://discord.gg/VaXeD" target="_blank" rel="noopener">Discord'a Katıl</a>`)}${card("🟣 KolicHub",`<a class="btn primary" href="https://discord.gg/koluchub" target="_blank" rel="noopener">Discord'a Katıl</a>`)}</div></section>`;
-
- h+=`<section class="page" id="p-settings"><div class="hero"><h1>⚙️ Ayarlar</h1><p class="muted">Bu sitede hesap/login sistemi yoktur.</p></div><div class="card"><p>Site verileri bu tarayıcıdaki localStorage içinde tutulur.</p><button class="btn danger" onclick="clearLocal()">Site verilerini sıfırla</button></div></section>`;
-
- h+=`<section class="page" id="p-admin"><div class="hero"><h1>🛡️ Admin Paneli</h1><p>Admin işlemleri sadece bu web sitesindeki içerikleri yönetir. Minecraft sunucusuna doğrudan işlem yapmaz.</p>${isAdmin?`<button class="btn danger" onclick="adminLogout()">Admin Çıkışı</button>`:`<button class="btn primary" onclick="adminLogin()">Admin Girişi</button>`}</div><div id="adminbox"></div></section>`;
-
- document.getElementById("main").innerHTML=h;
- renderAdmin();
- page("home");
+ nav();
+ let h='';
+ h+='<section class="page active" id="p-home"><div class="hero"><h1>💜 VaXeD KolicHub</h1><p class="muted">Bağımsız Minecraft topluluk merkezi.</p><div class="card"><h2>🎮 KolicHub</h2><div class="ip">🌐 '+IP+'</div><div class="actions"><button class="btn primary" onclick="copyIP()">📋 IP KOPYALA</button><a class="btn" href="https://discord.gg/koluchub" target="_blank">💬 KolicHub Discord</a><a class="btn" href="https://discord.gg/VaXeD" target="_blank">💜 VaXeD Discord</a></div></div></div><div class="grid">'+card('🌙 Gece Pazarı','<p>Topluluk bilgilendirme alanı.</p><span class="tag">Aktif</span>')+card('🔄 Son Trade\'ler',data.trades.length?data.trades.slice(-4).reverse().map(t=>'<p><b>'+esc(t.ign)+'</b> ↔ '+esc(t.itemWanted)+'</p>').join(''):'<p>Henüz trade yok.</p>')+card('🎁 Satın Alımlar','<p>Gizemli Kutu, Random Kit Kutusu ve diğer kutular.</p><button class="btn primary" onclick="page(\'purchases\')">Kutuları Gör</button>')+card('🎫 Destek','<p>Satın alım veya destek için lütfen ticket açınız.</p>')+'</div></section>';
+ h+='<section class="page" id="p-purchases"><div class="hero"><h1>🎁 Satın Alımlar</h1><p class="muted">Bir kutuya dokunarak Pay komutlarını görebilirsin.</p></div><div class="grid">'+(data.purchases.length?data.purchases.map(p=>'<div class="card"><h3>'+esc(p.icon)+' '+esc(p.name)+'</h3><p class="muted">🎫 Satın almak için ticket açınız.</p><button class="btn primary" onclick="purchase('+p.id+')">Detayları Gör</button></div>').join(''):'<div class="empty">Henüz kutu eklenmedi.</div>')+'</div><div class="empty" style="margin-top:13px">🎫 Satın alım veya destek için <b>lütfen ticket açınız.</b></div></section>';
+ h+='<section class="page" id="p-night"><div class="hero"><h1>🌙 Gece Pazarı</h1><p class="muted">Topluluk bilgi alanı.</p></div><div class="grid">'+['💎 Elmas Paketi','🟩 Zümrüt Sandığı','⬛ Obsidyen Seti'].map(x=>card(x,'<p>Gece Pazarı içeriği.</p><span class="tag">Bilgi</span>')).join('')+'</div></section>';
+ h+='<section class="page" id="p-market"><div class="hero"><h1>🛒 Oyuncu Pazarı</h1><button class="btn primary" onclick="marketForm()">➕ İlan Ekle</button></div><div class="grid">'+(data.market.length?data.market.map((m,i)=>card('🛒 '+esc(m.item),'<p>'+esc(m.description)+'</p><span class="tag">'+esc(m.date)+'</span><br><button class="btn danger" onclick="delMarket('+i+')">Sil</button>')).join(''):'<div class="empty">Henüz pazar ilanı yok.</div>')+'</div></section>';
+ h+='<section class="page" id="p-trade"><div class="hero"><h1>🔄 Trade Merkezi</h1><p class="muted">Sadece IGN, Discord adı, verdiğin ve istediğin eşya istenir.</p><button class="btn primary" onclick="tradeForm()">➕ Trade İlanı</button></div><div class="grid">'+(data.trades.length?data.trades.map((t,i)=>card('🔄 '+esc(t.ign),'<p>💬 Discord: <b>'+esc(t.discord)+'</b></p><p>📦 Veriyor: '+esc(t.itemGiven)+'</p><p>🎯 İstiyor: '+esc(t.itemWanted)+'</p><span class="tag">'+esc(t.date)+'</span><br><button class="btn danger" onclick="delTrade('+i+')">Sil</button>')).join(''):'<div class="empty">Henüz trade ilanı yok.</div>')+'</div></section>';
+ h+='<section class="page" id="p-players"><div class="hero"><h1>👥 Oyuncular</h1><input placeholder="Oyuncu ara..." oninput="filterGrid(this.value,\'playersGrid\')"></div><div class="grid" id="playersGrid">'+['Zheckolic','Caner','dryosun','an0x713'].map(x=>card('👤 '+x,'<span class="tag">Topluluk</span>')).join('')+'</div></section>';
+ h+='<section class="page" id="p-items"><div class="hero"><h1>💎 Eşyalar</h1></div><div class="grid">'+['💎 Diamond','🟩 Emerald','⬛ Obsidian','🟨 Gold Ingot'].map(x=>card(x,'<p>Topluluk eşya bilgisi.</p>')).join('')+'</div></section>';
+ h+='<section class="page" id="p-calculators"><div class="hero"><h1>🧮 Hesaplayıcılar</h1></div><div class="grid">'+card('📦 Stack Hesaplayıcı','<div class="field"><label>Toplam eşya</label><input id="stack" type="number" placeholder="128"></div><button class="btn primary" onclick="stackCalc()">Hesapla</button><p id="stackOut"></p>')+card('⏱️ Süre Hesaplayıcı','<div class="field"><label>Dakika</label><input id="minutes" type="number" placeholder="60"></div><button class="btn primary" onclick="timeCalc()">Hesapla</button><p id="timeOut"></p>')+'</div></section>';
+ h+='<section class="page" id="p-farm"><div class="hero"><h1>🌾 Farm Rehberleri</h1></div><div class="grid">'+['Kelp Farmı','Bambu Farmı','Kemik Tozu Farmı','Demir Farmı'].map(x=>card('🌾 '+x,'<p>Kurulum ve materyal bilgileri.</p><button class="btn" onclick="toast(\'Rehber açıldı\')">Rehberi Aç</button>')).join('')+'</div></section>';
+ h+='<section class="page" id="p-guides"><div class="hero"><h1>📚 Rehberler</h1></div><div class="grid">'+['🌱 Başlangıç','🔄 Takas','🌾 Farming','🛒 Pazar','👥 Topluluk','🛡️ Güvenlik'].map(x=>card(x,'<p class="muted">Topluluk rehberi.</p><button class="btn" onclick="toast(\'Rehber açıldı\')">Oku</button>')).join('')+'</div></section>';
+ h+='<section class="page" id="p-commands"><div class="hero"><h1>⌨️ Komutlar</h1><input placeholder="Komut ara..." oninput="filterGrid(this.value,\'commandsGrid\')"></div><div class="grid" id="commandsGrid">'+[['/spawn','Başlangıç noktasına git'],['/home','Ev noktasını kullan'],['/shop','Mağazayı aç'],['/ah','Oyuncu pazarını aç']].map(x=>card('<span class="tag">'+x[0]+'</span>','<p>'+x[1]+'</p><button class="btn" onclick="copy(\''+escJS(x[0])+'\')">Kopyala</button>')).join('')+'</div></section>';
+ h+='<section class="page" id="p-events"><div class="hero"><h1>📅 Etkinlikler</h1></div><div class="grid">'+card('Topluluk Etkinliği','<p>Etkinlik bilgileri burada yayınlanır.</p><span class="tag">Yakında</span>')+card('KolicHub Etkinliği','<p>Etkinlik bilgileri burada yayınlanır.</p><span class="tag">Yakında</span>')+'</div></section>';
+ h+='<section class="page" id="p-codes"><div class="hero"><h1>🎟️ Kodlar</h1></div><div class="grid">'+['KOLIC2026','VAXED2026'].map(x=>card(x,'<p>Topluluk kodu.</p><button class="btn" onclick="copy(\''+x+'\')">Kopyala</button>')).join('')+'</div></section>';
+ h+='<section class="page" id="p-giveaway"><div class="hero"><h1>🎉 Çekilişler</h1><p>Ücretsiz topluluk etkinlikleri.</p></div><div class="grid">'+card('🌟 Gizemli Kutu','<p>Çekiliş bilgisi.</p><button class="btn primary" onclick="toast(\'Katılım kaydedildi\')">Katıl</button>')+card('💜 KolicHub Rozeti','<p>Topluluk çekilişi.</p><button class="btn primary" onclick="toast(\'Katılım kaydedildi\')">Katıl</button>')+'</div></section>';
+ h+='<section class="page" id="p-achievements"><div class="hero"><h1>🏆 Başarımlar</h1></div><div class="grid">'+['İlk Takas','İlk İlan','10 Takas','100 Takas','Farm Ustası','Topluluk Üyesi'].map(x=>card('🏅 '+x,'<p>Topluluk başarımı.</p>')).join('')+'</div></section>';
+ h+='<section class="page" id="p-reports"><div class="hero"><h1>🚨 Bildirimler</h1><p>Bir rapor kişiyi otomatik olarak scammer ilan etmez.</p><div class="actions"><button class="btn primary" onclick="reportForm()">➕ Oyuncu Bildir</button><button class="btn" onclick="scammerForm()">➕ Scammer Ekle</button></div></div><div class="grid">'+card('⚠️ Scammer Listesi',data.scammers.length?data.scammers.map(s=>'<p><b>'+esc(s.user)+'</b> — '+esc(s.reason||'')+'</p>').join(''):'<div class="empty">Scammer listesi başlangıçta boş.</div>')+card('📨 Son Bildirimler',data.reports.length?data.reports.slice().reverse().map(r=>'<p><b>'+esc(r.user)+'</b> — '+esc(r.reason)+'<br><span class="small">Kanıt: '+esc(r.evidenceName||'Yok')+'</span></p>').join(''):'<div class="empty">Henüz bildirim yok.</div>')+'</div></section>';
+ h+='<section class="page" id="p-discord"><div class="hero"><h1>💬 Discord</h1></div><div class="grid">'+card('💜 VaXeD','<a class="btn primary" href="https://discord.gg/VaXeD" target="_blank">Discord\'a Katıl</a>')+card('🟣 KolicHub','<a class="btn primary" href="https://discord.gg/koluchub" target="_blank">Discord\'a Katıl</a>')+'</div></section>';
+ h+='<section class="page" id="p-settings"><div class="hero"><h1>⚙️ Ayarlar</h1><p class="muted">Bu sitede login/register sistemi yoktur.</p></div><div class="card"><p>Site verileri bu cihazdaki localStorage içinde tutulur.</p><button class="btn danger" onclick="resetData()">Site verilerini sıfırla</button></div></section>';
+ h+='<section class="page" id="p-admin"><div class="hero"><h1>🛡️ Admin Paneli</h1><p>Site tarafındaki içerikleri yönetir. Minecraft sunucusuna doğrudan işlem yapmaz.</p>'+(admin?'<button class="btn danger" onclick="logout()">Admin Çıkışı</button>':'<button class="btn primary" onclick="login()">Admin Girişi</button>')+'</div><div id="adminBox"></div></section>';
+ document.getElementById('main').innerHTML=h;renderAdmin();page('home');
 }
-
-function renderAdmin(){
- const a=document.getElementById("adminbox");if(!a)return;
- if(!isAdmin){a.innerHTML="<div class='empty'>🔐 Yetkili giriş gerekli.</div>";return}
- a.innerHTML=`<div class="grid">
- ${card("🎁 Satın Alım / Kutu Yönetimi",`
-  <p class="muted">Yeni kutu adı ve Pay isimlerini ekleyebilirsin.</p>
-  <button class="btn primary" onclick="adminAddPurchase()">➕ Kutu Ekle</button>
-  <hr>${data.purchases.map(p=>`<p><b>${esc(p.icon)} ${esc(p.name)}</b><br><span class="small">${p.commands.map(c=>"/Pay "+esc(c)).join(" · ")}</span><br><button class="btn danger" onclick="adminDeletePurchase(${p.id})">Sil</button></p>`).join("")}
- `)}
- ${card("🔄 Trade Yönetimi",data.trades.length?data.trades.map((t,i)=>`<p><b>${esc(t.ign)}</b> / ${esc(t.discord)}<br>${esc(t.itemGiven)} → ${esc(t.itemWanted)}<br><button class="btn danger" onclick="deleteTrade(${i})">Sil</button></p>`).join(""):"<p>Trade yok.</p>")}
- ${card("🛒 Pazar Yönetimi",data.market.length?data.market.map((m,i)=>`<p><b>${esc(m.item)}</b><br>${esc(m.description)}<br><button class="btn danger" onclick="deleteMarket(${i})">Sil</button></p>`).join(""):"<p>Pazar ilanı yok.</p>")}
- ${card("🚨 Rapor Yönetimi",data.reports.length?data.reports.map((r,i)=>`<p><b>${esc(r.user)}</b> — ${esc(r.reason)}<br><span class="small">${esc(r.evidenceName||"Kanıt yok")}</span><br><button class="btn ok" onclick="promoteScammer(${i})">Scammer'a Ekle</button> <button class="btn danger" onclick="deleteReport(${i})">Sil</button></p>`).join(""):"<p>Rapor yok.</p>")}
- ${card("⚠️ Scammer Yönetimi",data.scammers.length?data.scammers.map((s,i)=>`<p><b>${esc(s.user)}</b> — ${esc(s.reason||"") }<br><button class="btn danger" onclick="deleteScammer(${i})">Sil</butt
+function renderAdmin(){const e=document.getElementById('adminBox');if(!e)return;if(!admin){e.innerHTML='<div class="empty">🔐 Yetkili giriş gerekli.</div>';return}e.innerHTML='<div class="grid">'+card('🎁 Kutu Yönetimi','<button class="btn primary" onclick="addBox()">➕ Kutu Ekle</button><hr>'+(data.purchases.length?data.purchases.map(p=>'<p><b>'+esc(p.icon)+' '+esc(p.name)+'</b><br><span class="small">'+p.commands.map(c=>'/Pay '+esc(c)).join(' · ')+'</span><br><button class="btn danger" onclick="delBox('+p.id+')">Sil</button></p>').join(''):'<p>Kutu yok.</p>') )+card('🔄 Trade Yönetimi',data.trades.length?data.trades.map((t,i)=>'<p><b>'+esc(t.ign)+'</b> / '+esc(t.discord)+'<br>'+esc(t.itemGiven)+' → '+esc(t.itemWanted)+'<br><button class="btn danger" onclick="delTradeAdmin('+i+')">Sil</button></p>').join(''):'<p>Trade yok.</p>')+card('🛒 Pazar Yönetimi',data.market.length?data.market.map((m,i)=>'<p><b>'+esc(m.item)+'</b><br>'+esc(m.description)+'<br><button class="btn danger" onclick="delMarketAdmin('+i+')">Sil</button></p>').join(''):'<p>Pazar yok.</p>')+card('🚨 Rapor Yönetimi',data.reports.length?data.reports.map((r,i)=>'<p><b>'+esc(r.user)+'</b> — '+esc(r.reason)+'<br><span class="small">'+esc(r.evidenceName||'Kanıt yok')+'</span><br><button class="btn ok" onclick="promote('+i+')">Scammer\'a Ekle</button> <button class="btn danger" onclick="delReport('+i+')">Sil</button></p>').join(''):'<p>Rapor yok.</p>')+card('⚠️ Scammer Yönetimi',data.scammers.length?data.scammers.map((s,i)=>'<p><b>'+esc(s.user)+'</b> — '+esc(s.reason||'')+'<br><button class="btn danger" onclick="delScammer('+i+')">Sil</button></p>').join(''):'<p>Scammer listesi boş.</p>')+'</div><div class="card" style="margin-top:12px"><h3>🧹 Temizleme</h3><p>Trade, pazar, rapor ve scammer kayıtlarını temizler.</p><button class="btn danger" onclick="clearModeration()">Tümünü Temizle</button></div>'}
+function login(){const p=prompt('Admin şifresi:');if(p===ADMIN){admin=true;document.getElementById('status').textContent='🛡️ Admin aktif';render();page('admin');toast('Admin girişi başarılı')}else if(p!==null)toast('Şifre yanlış')}
+function logout(){admin=false;document.getElementById('status').textContent='Topluluk Merkezi';render();page('admin')}
+function purchase(id){const p=data.purchases.find(x=>x.id===id);if(!p)return;openModal('🎁 '+esc(p.name),'<p>🎫 Satın alım için ticket açınız.</p><p class="muted">Pay komutları:</p>'+p.commands.map(c=>'<div class="actions" style="margin:8px 0"><input value="/Pay '+esc(c)+'" readonly><button class="btn primary" onclick="copyPay(\''+escJS(c)+'\')">Kopyala</button></div>').join('')+'<div class="empty">Lütfen ticket açınız.</div>')}
+function addBox(){openModal('➕ Yeni Kutu','<div class="field"><label>Kutu adı</label><input id="boxName" placeholder="Örn. Süper Kutu"></div><div class="field"><label>Pay isimleri</label><textarea id="boxCmd" placeholder="RaveXismc\nkorkunckamyon"></textarea></div><button class="btn primary" onclick="saveBox()">Ekle</button>')}
+function saveBox(){const n=document.getElementById('boxName').value.trim();const c=docume
