@@ -1262,4 +1262,1057 @@ th{
 
   <!-- COMMANDS -->
 
-  <sect
+  <section class="page" id="p-events">
+
+    <div class="hero">
+      <h1>🎉 Etkinlikler</h1>
+      <p>Topluluk etkinlikleri.</p>
+    </div>
+
+    <div class="card">
+      Henüz aktif etkinlik bulunmuyor.
+    </div>
+
+  </section>
+
+
+  <!-- CODES -->
+
+  <section class="page" id="p-codes">
+
+    <div class="hero">
+      <h1>🎟️ Kodlar</h1>
+      <p>Aktif topluluk kodları.</p>
+    </div>
+
+    <div class="card">
+      Henüz aktif kod bulunmuyor.
+    </div>
+
+  </section>
+
+
+  <!-- GIVEAWAY -->
+
+  <section class="page" id="p-giveaway">
+
+    <div class="hero">
+      <h1>🎁 Çekilişler</h1>
+      <p>Aktif çekilişler.</p>
+    </div>
+
+    <div class="card">
+      Henüz aktif çekiliş bulunmuyor.
+    </div>
+
+  </section>
+
+
+  <!-- ACHIEVEMENTS -->
+
+  <section class="page" id="p-achievements">
+
+    <div class="hero">
+      <h1>🏆 Başarımlar</h1>
+      <p>Topluluk başarımları.</p>
+    </div>
+
+    <div class="grid">
+
+      <div class="card">
+        <h3>💬 İlk Mesaj</h3>
+        <p>Sohbette ilk mesajını gönder.</p>
+      </div>
+
+      <div class="card">
+        <h3>🛒 İlk İlan</h3>
+        <p>İlk market ilanını oluştur.</p>
+      </div>
+
+      <div class="card">
+        <h3>🤝 İlk Trade</h3>
+        <p>İlk trade ilanını oluştur.</p>
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- REPORTS -->
+
+  <section class="page" id="p-reports">
+
+    <div class="hero">
+      <h1>🚨 Rapor Sistemi</h1>
+      <p>Şüpheli oyuncuları site yönetimine bildirebilirsin.</p>
+    </div>
+
+    <div class="form">
+
+      <div class="field">
+        <label>Raporlanan oyuncu</label>
+        <input id="reportPlayer" placeholder="Oyuncu adı">
+      </div>
+
+      <div class="field">
+        <label>Sebep</label>
+        <textarea id="reportReason"
+          placeholder="Neden raporluyorsun?"></textarea>
+      </div>
+
+      <div class="field">
+        <label>Kanıt fotoğrafı</label>
+        <input id="reportEvidence" type="file" accept="image/*">
+      </div>
+
+      <button class="btn danger" onclick="addReport()">
+        🚨 Rapor Gönder
+      </button>
+
+    </div>
+
+    <h2 class="section-title">
+      ⚠️ Scammer Listesi
+    </h2>
+
+    <div id="scammerList" class="grid"></div>
+
+  </section>
+
+
+  <!-- DISCORD -->
+
+  <section class="page" id="p-discord">
+
+    <div class="hero">
+      <h1>💜 Discord</h1>
+      <p>VaXeD ve KolicHub Discord topluluklarına katıl.</p>
+    </div>
+
+    <div class="grid">
+
+      <div class="card">
+
+        <h3>VaXeD</h3>
+
+        <p>
+          Destek ve ticket işlemleri.
+        </p>
+
+        <button class="btn"
+          style="margin-top:12px"
+          onclick="window.open('https://discord.gg/VaXeD','_blank')">
+          Discord'a Katıl
+        </button>
+
+      </div>
+
+      <div class="card">
+
+        <h3>KolicHub</h3>
+
+        <p>
+          KolicHub topluluğu.
+        </p>
+
+        <button class="btn"
+          style="margin-top:12px"
+          onclick="window.open('https://discord.gg/koluchub','_blank')">
+          Discord'a Katıl
+        </button>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- SETTINGS -->
+
+  <section class="page" id="p-settings">
+
+    <div class="hero">
+      <h1>⚙️ Ayarlar</h1>
+      <p>Site hesabı ve kişisel ayarlar.</p>
+    </div>
+
+    <div class="card">
+
+      <h3>👤 Hesap</h3>
+
+      <p id="settingsUsername"
+        style="margin-top:8px">
+      </p>
+
+      <button class="btn danger"
+        style="margin-top:15px"
+        onclick="logout()">
+        Çıkış Yap
+      </button>
+
+    </div>
+
+  </section>
+
+
+  <!-- ADMIN -->
+
+  <section class="page" id="p-admin">
+
+    <div class="hero">
+      <h1>🛡️ Admin Paneli</h1>
+      <p>Site yönetim paneli.</p>
+    </div>
+
+    <div id="adminContent"></div>
+
+  </section>
+
+</main>
+
+
+<!-- MODAL -->
+
+<div class="modal" id="modal">
+
+  <div class="modal-box">
+
+    <div class="modal-head">
+
+      <h3 id="modalTitle">
+        VaXeD
+      </h3>
+
+      <button class="close" onclick="closeModal()">
+        ×
+      </button>
+
+    </div>
+
+    <div id="modalContent"></div>
+
+  </div>
+
+</div>
+
+
+<!-- TOAST -->
+
+<div id="toast"></div>
+
+
+<!-- MOBILE NAV -->
+
+<nav class="bottom-nav" id="bottomNav"></nav>
+
+
+<script>
+
+(function(){
+
+const KEY = 'vaxed_kolichub_login_v3';
+
+const ADMIN_PASS = 'V6559';
+
+let admin = false;
+
+let currentChannel = 'genel';
+
+
+let db = {
+
+  users:[],
+  current:null,
+
+  boxes:[
+    {
+      name:'Gizemli Kutu',
+      pay:'RaveXismc'
+    },
+    {
+      name:'Random Kit kutusu',
+      pay:'Korkunckamyon'
+    },
+    {
+      name:'Kaliteli kutu',
+      pay:'RaveXismc'
+    },
+    {
+      name:'Kalitesiz kutu',
+      pay:'Korkunckamyon'
+    },
+    {
+      name:'Random kutu',
+      pay:'RaveXismc'
+    }
+  ],
+
+  night:{
+    yellow:[],
+    green:[],
+    red:[]
+  },
+
+  markets:[],
+  trades:[],
+  reports:[],
+  scammers:[],
+
+  chat:{
+    genel:[],
+    market:[],
+    trade:[],
+    duyurular:[]
+  },
+
+  muted:[],
+  banned:[],
+
+  announcements:[]
+
+};
+
+
+/* =========================
+   STORAGE
+========================= */
+
+function save(){
+
+  localStorage.setItem(
+    KEY,
+    JSON.stringify(db)
+  );
+
+}
+
+
+function load(){
+
+  try{
+
+    const data =
+      localStorage.getItem(KEY);
+
+    if(data){
+
+      const parsed =
+        JSON.parse(data);
+
+      db =
+        Object.assign(db,parsed);
+
+      db.chat =
+        Object.assign(
+          {
+            genel:[],
+            market:[],
+            trade:[],
+            duyurular:[]
+          },
+          db.chat || {}
+        );
+
+      db.night =
+        Object.assign(
+          {
+            yellow:[],
+            green:[],
+            red:[]
+          },
+          db.night || {}
+        );
+
+    }
+
+  }catch(error){
+
+    console.log(error);
+
+  }
+
+}
+
+
+/* =========================
+   HELPERS
+========================= */
+
+function esc(value){
+
+  return String(value ?? '')
+    .replaceAll('&','&amp;')
+    .replaceAll('<','&lt;')
+    .replaceAll('>','&gt;')
+    .replaceAll('"','&quot;')
+    .replaceAll("'","&#039;");
+
+}
+
+
+function toast(message){
+
+  const el =
+    document.getElementById('toast');
+
+  el.textContent = message;
+
+  el.classList.add('show');
+
+  clearTimeout(window.toastTimer);
+
+  window.toastTimer =
+    setTimeout(function(){
+
+      el.classList.remove('show');
+
+    },2500);
+
+}
+
+
+function copyText(text){
+
+  if(navigator.clipboard){
+
+    navigator.clipboard
+      .writeText(text)
+      .then(function(){
+
+        toast('Kopyalandı');
+
+      });
+
+  }else{
+
+    const textarea =
+      document.createElement('textarea');
+
+    textarea.value = text;
+
+    document.body.appendChild(textarea);
+
+    textarea.select();
+
+    document.execCommand('copy');
+
+    textarea.remove();
+
+    toast('Kopyalandı');
+
+  }
+
+}
+
+
+function copyIP(){
+
+  copyText('kolichub.net');
+
+}
+
+
+function openModal(title,html){
+
+  document.getElementById(
+    'modalTitle'
+  ).textContent = title;
+
+  document.getElementById(
+    'modalContent'
+  ).innerHTML = html;
+
+  document.getElementById(
+    'modal'
+  ).classList.add('show');
+
+}
+
+
+function closeModal(){
+
+  document.getElementById(
+    'modal'
+  ).classList.remove('show');
+
+}
+
+
+/* =========================
+   PAGE SYSTEM
+========================= */
+
+window.go=function(id){
+
+  if(!id.startsWith('p-')){
+    id='p-'+id;
+  }
+
+  document
+    .querySelectorAll('.page')
+    .forEach(function(page){
+
+      page.classList.remove('active');
+
+    });
+
+
+  const page =
+    document.getElementById(id);
+
+  if(!page)return;
+
+  page.classList.add('active');
+
+
+  document
+    .querySelectorAll(
+      '.nav-btn,.bottom-nav button'
+    )
+    .forEach(function(button){
+
+      button.classList.toggle(
+        'active',
+        button.dataset.page === id
+      );
+
+    });
+
+
+  if(id==='p-home') renderHome();
+
+  if(id==='p-purchases') renderBoxes();
+
+  if(id==='p-night') renderNight();
+
+  if(id==='p-market') renderMarkets();
+
+  if(id==='p-trade') renderTrades();
+
+  if(id==='p-chat') renderChat();
+
+  if(id==='p-players') renderPlayers();
+
+  if(id==='p-reports') renderReports();
+
+  if(id==='p-admin') renderAdmin();
+
+  if(id==='p-settings') renderSettings();
+
+};
+
+
+/* =========================
+   NAV
+========================= */
+
+const NAV=[
+
+  {
+    title:'Ana Menü',
+
+    items:[
+      ['home','🏠 Ana Sayfa'],
+      ['purchases','📦 Kutular'],
+      ['night','🌙 Gece Pazarı'],
+      ['market','🛒 Player Market'],
+      ['trade','🤝 Trade Center'],
+      ['chat','💬 Sohbet']
+    ]
+
+  },
+
+  {
+    title:'Topluluk',
+
+    items:[
+      ['players','👥 Oyuncular'],
+      ['items','🧱 Itemler'],
+      ['calculators','🧮 Hesaplayıcılar'],
+      ['farm','🌾 Farm'],
+      ['guides','📚 Rehberler'],
+      ['commands','⌨️ Komutlar'],
+      ['events','🎉 Etkinlikler'],
+      ['codes','🎟️ Kodlar'],
+      ['giveaway','🎁 Çekiliş'],
+      ['achievements','🏆 Başarımlar']
+    ]
+
+  },
+
+  {
+    title:'Diğer',
+
+    items:[
+      ['reports','🚨 Raporlar'],
+      ['discord','💜 Discord'],
+      ['settings','⚙️ Ayarlar'],
+      ['admin','🛡️ Admin']
+    ]
+
+  }
+
+];
+
+
+function buildNav(){
+
+  const sidebar =
+    document.getElementById('sidebar');
+
+  const bottom =
+    document.getElementById('bottomNav');
+
+  sidebar.innerHTML='';
+
+  bottom.innerHTML='';
+
+
+  NAV.forEach(function(group){
+
+    const title =
+      document.createElement('div');
+
+    title.className='nav-title';
+
+    title.textContent=group.title;
+
+    sidebar.appendChild(title);
+
+
+    group.items.forEach(function(item){
+
+      const button =
+        document.createElement('button');
+
+      button.className='nav-btn';
+
+      button.dataset.page =
+        'p-'+item[0];
+
+      button.textContent =
+        item[1];
+
+      button.onclick=function(){
+
+        go(item[0]);
+
+      };
+
+      sidebar.appendChild(button);
+
+    });
+
+  });
+
+
+  const mobileItems=[
+
+    ['home','🏠'],
+
+    ['market','🛒'],
+
+    ['trade','🤝'],
+
+    ['chat','💬'],
+
+    ['settings','⚙️']
+
+  ];
+
+
+  mobileItems.forEach(function(item){
+
+    const button =
+      document.createElement('button');
+
+    button.dataset.page =
+      'p-'+item[0];
+
+    button.innerHTML=item[1];
+
+    button.onclick=function(){
+
+      go(item[0]);
+
+    };
+
+    bottom.appendChild(button);
+
+  });
+
+}
+
+
+/* =========================
+   HEADER
+========================= */
+
+function updateHeader(){
+
+  const user =
+    db.users.find(function(u){
+
+      return u.username === db.current;
+
+    });
+
+
+  document.getElementById(
+    'headerUser'
+  ).textContent =
+    user ? '@'+user.username : 'Misafir';
+
+
+  const homeUser =
+    document.getElementById(
+      'homeUsername'
+    );
+
+  if(homeUser){
+
+    homeUser.textContent =
+      user ? user.username : '-';
+
+  }
+
+
+  const settingsUser =
+    document.getElementById(
+      'settingsUsername'
+    );
+
+  if(settingsUser){
+
+    settingsUser.textContent =
+      user
+      ? 'Kullanıcı: '+user.username
+      : '';
+
+  }
+
+}
+
+
+/* =========================
+   LOGIN
+========================= */
+
+window.showLogin=function(){
+
+  document.getElementById(
+    'loginForm'
+  ).style.display='block';
+
+  document.getElementById(
+    'registerForm'
+  ).style.display='none';
+
+  document.getElementById(
+    'loginTab'
+  ).classList.add('active');
+
+  document.getElementById(
+    'registerTab'
+  ).classList.remove('active');
+
+};
+
+
+window.showRegister=function(){
+
+  document.getElementById(
+    'loginForm'
+  ).style.display='none';
+
+  document.getElementById(
+    'registerForm'
+  ).style.display='block';
+
+  document.getElementById(
+    'loginTab'
+  ).classList.remove('active');
+
+  document.getElementById(
+    'registerTab'
+  ).classList.add('active');
+
+};
+
+
+/* =========================
+   REGISTER
+========================= */
+
+window.register=function(){
+
+  const username =
+    document
+      .getElementById('registerUsername')
+      .value
+      .trim();
+
+  const password =
+    document
+      .getElementById('registerPassword')
+      .value;
+
+  const password2 =
+    document
+      .getElementById('registerPassword2')
+      .value;
+
+  const error =
+    document.getElementById(
+      'registerError'
+    );
+
+
+  error.textContent='';
+
+
+  if(username.length<3){
+
+    error.textContent =
+      'Kullanıcı adı en az 3 karakter olmalı.';
+
+    return;
+
+  }
+
+
+  if(!/^[a-zA-Z0-9_]+$/.test(username)){
+
+    error.textContent =
+      'Sadece harf, sayı ve _ kullanabilirsin.';
+
+    return;
+
+  }
+
+
+  if(password.length<4){
+
+    error.textContent =
+      'Şifre en az 4 karakter olmalı.';
+
+    return;
+
+  }
+
+
+  if(password!==password2){
+
+    error.textContent =
+      'Şifreler aynı değil.';
+
+    return;
+
+  }
+
+
+  if(
+    db.users.some(function(u){
+
+      return u.username.toLowerCase()
+        === username.toLowerCase();
+
+    })
+  ){
+
+    error.textContent =
+      'Bu kullanıcı adı zaten alınmış.';
+
+    return;
+
+  }
+
+
+  db.users.push({
+
+    username:username,
+
+    password:password,
+
+    createdAt:Date.now()
+
+  });
+
+
+  db.current=username;
+
+  save();
+
+  updateHeader();
+
+
+  document.getElementById(
+    'loginPage'
+  ).style.display='none';
+
+
+  buildNav();
+
+  go('home');
+
+  toast('Kayıt başarılı!');
+
+};
+
+
+/* =========================
+   LOGIN
+========================= */
+
+window.login=function(){
+
+  const username =
+    document
+      .getElementById('loginUsername')
+      .value
+      .trim();
+
+  const password =
+    document
+      .getElementById('loginPassword')
+      .value;
+
+  const error =
+    document.getElementById(
+      'loginError'
+    );
+
+
+  error.textContent='';
+
+
+  const user =
+    db.users.find(function(u){
+
+      return (
+        u.username.toLowerCase()
+        === username.toLowerCase()
+        &&
+        u.password===password
+      );
+
+    });
+
+
+  if(!user){
+
+    error.textContent =
+      'Kullanıcı adı veya şifre yanlış.';
+
+    return;
+
+  }
+
+
+  if(
+    db.banned.includes(
+      user.username
+    )
+  ){
+
+    error.textContent =
+      'Bu hesap siteden banlanmış.';
+
+    return;
+
+  }
+
+
+  db.current=user.username;
+
+  save();
+
+  updateHeader();
+
+
+  document.getElementById(
+    'loginPage'
+  ).style.display='none';
+
+
+  buildNav();
+
+  go('home');
+
+  toast(
+    'Hoş geldin, '+user.username+'!'
+  );
+
+};
+
+
+/* =========================
+   LOGOUT
+========================= */
+
+window.logout=function(){
+
+  db.current=null;
+
+  admin=false;
+
+  save();
+
+  document.getElementById(
+    'loginPage'
+  ).style.display='flex';
+
+  showLogin();
+
+  toast('Çıkış yapıldı');
+
+};
+
+
+/* =========================
+   HOME
+========================= */
+
+function renderHome(){
+
+  updateHeader();
+
+}
+
+
+/* =========================
+   START
+========================= */
+
+load();
+
+buildNav();
+
+updateHeader();
+
+
+if(db.current){
+
+  document.getElementById(
+    'loginPage'
+  ).style.display='none';
+
+  go('home');
+
+}else{
+
+  document.getElementById(
+    'loginPage'
+  ).style.display='flex';
+
+}
+
+
+})();
+
+</script>
+
+</body>
+</html>
