@@ -1,139 +1,1265 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="tr">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#08060d">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>VaXeD | KolicHub</title>
+
 <style>
-*{box-sizing:border-box}html,body{margin:0;padding:0;background:#08060d;color:#f7f2ff;font-family:Arial,sans-serif}body{min-height:100vh;background:radial-gradient(circle at 50% 0,#281044 0,#08060d 38%)}button,input,textarea{font:inherit}button{cursor:pointer}a{text-decoration:none;color:inherit}.header{position:sticky;top:0;z-index:20;background:rgba(8,6,13,.96);border-bottom:1px solid #2b2140}.head{max-width:1200px;margin:auto;padding:16px;display:flex;align-items:center;justify-content:space-between}.logo{font-size:22px;font-weight:900}.logo span{color:#c084fc}.pill{border:1px solid #65428d;border-radius:999px;padding:8px 12px;color:#d9c7ff;font-size:13px}.topmenu{max-width:1200px;margin:0 auto;padding:8px 14px;display:flex;gap:7px;overflow-x:auto;position:sticky;top:61px;z-index:19;background:rgba(8,6,13,.96);border-bottom:1px solid #2b2140}.topmenu button{white-space:nowrap;border:1px solid #332542;background:#120e19;color:#cfc3dc;border-radius:10px;padding:8px 11px}.topmenu button.active{background:#7c3aed;color:#fff;border-color:#9d63ff}.layout{max-width:1200px;margin:auto;display:flex;gap:14px;padding:14px}.side{width:220px;flex:none;background:#100d17;border:1px solid #2b2140;border-radius:16px;padding:8px;height:max-content;position:sticky;top:80px}.nav{display:block;width:100%;border:0;background:transparent;color:#aaa1b8;text-align:left;padding:10px;border-radius:10px;margin:2px 0}.nav:hover,.nav.active{background:#211333;color:white}main{min-width:0;flex:1}.page{display:none}.page.active{display:block}.hero,.card{background:linear-gradient(145deg,#181321,#0e0c13);border:1px solid #2b2140;border-radius:16px;padding:16px;box-shadow:0 8px 30px #0005}.hero{margin-bottom:12px}.hero h1,.hero h2,.card h3{margin:0 0 9px}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}.muted{color:#aaa1b8}.ip{font-size:22px;font-weight:900;color:#d8c3ff;margin:10px 0}.actions{display:flex;gap:8px;flex-wrap:wrap}.btn{display:inline-flex;align-items:center;justify-content:center;border:1px solid #44335c;background:#17121f;color:#fff;padding:10px 13px;border-radius:10px}.primary{background:linear-gradient(135deg,#7c3aed,#a855f7);border-color:#9d63ff}.danger{background:#35131b;border-color:#722837}.ok{background:#102b1b;border-color:#26703e}.tag{display:inline-block;border:1px solid #4d3968;border-radius:999px;padding:4px 8px;font-size:12px;color:#d7c5f5}.empty{padding:24px;text-align:center;border:1px dashed #44335c;border-radius:13px;color:#aaa1b8}.field{margin:0 0 11px}.field label{display:block;font-size:13px;color:#cfc6dc;margin-bottom:6px}input,textarea{width:100%;background:#0b0910;color:white;border:1px solid #3a2c4d;border-radius:10px;padding:11px;outline:none}textarea{min-height:100px;resize:vertical}input:focus,textarea:focus{border-color:#9b5cff}.bottom{display:none}.modal{display:none;position:fixed;inset:0;background:#000b;z-index:100;align-items:center;justify-content:center;padding:15px}.modal.show{display:flex}.modalbox{width:min(560px,100%);max-height:90vh;overflow:auto;background:#12101a;border:1px solid #543a72;border-radius:17px;padding:17px}.toast{display:none;position:fixed;z-index:200;left:50%;bottom:25px;transform:translateX(-50%);background:#241633;border:1px solid #694a91;border-radius:12px;padding:11px 15px}.authScreen{position:fixed;inset:0;z-index:1000;display:flex;align-items:center;justify-content:center;padding:18px;background:radial-gradient(circle at 50% 0,#3b1760 0,#08060d 48%,#050408 100%)}.authBox{width:min(430px,100%);background:rgba(16,12,24,.98);border:1px solid #684394;border-radius:22px;padding:24px;box-shadow:0 20px 70px #000}.authLogo{text-align:center;font-size:30px;font-weight:900;margin-bottom:6px}.authLogo span{color:#c084fc}.authTabs{display:grid;grid-template-columns:1fr 1fr;gap:7px;background:#0b0910;border-radius:12px;padding:5px;margin:20px 0}.authTabs button{border:0;background:transparent;color:#aaa1b8;padding:10px;border-radius:9px}.authTabs button.active{background:#7c3aed;color:#fff}.authForm{display:none}.authForm.active{display:block}.authMsg{min-height:22px;text-align:center;color:#f0a7c5;font-size:13px;margin-top:8px}.userPill{display:flex;align-items:center;gap:8px}.logoutBtn{border:1px solid #543a72;background:#17121f;color:#fff;border-radius:9px;padding:8px 10px}.small{font-size:12px;color:#aaa1b8}hr{border:0;border-top:1px solid #2b2140;margin:14px 0}@media(max-width:800px){.topmenu{top:61px;padding:7px 8px}.topmenu button{font-size:12px;padding:7px 9px}.layout{display:block;padding:10px}.side{display:none}main{padding-bottom:75px}.bottom{display:grid;position:fixed;left:0;right:0;bottom:0;z-index:50;grid-template-columns:repeat(5,1fr);background:#0c0a11;border-top:1px solid #2b2140;padding:7px 2px}.bottom button{border:0;background:transparent;color:#aaa1b8;font-size:10px;padding:3px}.bottom button.active{color:#d5b3ff}.bottom span{font-size:17px}.grid{grid-template-columns:1fr}}
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+  font-family:Arial,Helvetica,sans-serif;
+}
+
+:root{
+  --bg:#08080d;
+  --panel:#11111a;
+  --panel2:#171722;
+  --purple:#8b5cf6;
+  --purple2:#6d28d9;
+  --text:#fff;
+  --muted:#a7a7b7;
+  --border:#29293a;
+  --green:#22c55e;
+  --red:#ef4444;
+  --yellow:#eab308;
+}
+
+body{
+  background:var(--bg);
+  color:var(--text);
+  min-height:100vh;
+}
+
+button,input,textarea,select{
+  font:inherit;
+}
+
+button{
+  cursor:pointer;
+}
+
+a{
+  color:inherit;
+  text-decoration:none;
+}
+
+/* HEADER */
+
+header{
+  position:fixed;
+  top:0;
+  left:0;
+  right:0;
+  height:64px;
+  background:rgba(8,8,13,.94);
+  backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--border);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 18px;
+  z-index:1000;
+}
+
+.logo{
+  font-size:22px;
+  font-weight:900;
+  letter-spacing:1px;
+}
+
+.logo span{
+  color:var(--purple);
+}
+
+.header-user{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
+.user-badge{
+  background:#191522;
+  border:1px solid #3b2468;
+  padding:7px 11px;
+  border-radius:10px;
+  font-size:13px;
+}
+
+.logout-btn{
+  border:1px solid #4b2020;
+  background:#241313;
+  color:#ff8d8d;
+  padding:7px 10px;
+  border-radius:9px;
+}
+
+/* SIDEBAR */
+
+.sidebar{
+  position:fixed;
+  top:64px;
+  left:0;
+  bottom:0;
+  width:235px;
+  background:#0d0d14;
+  border-right:1px solid var(--border);
+  padding:15px 10px;
+  overflow-y:auto;
+  z-index:900;
+}
+
+.nav-title{
+  color:#66667a;
+  font-size:11px;
+  text-transform:uppercase;
+  margin:13px 10px 7px;
+  font-weight:bold;
+}
+
+.nav-btn{
+  width:100%;
+  background:transparent;
+  color:#c7c7d5;
+  border:0;
+  text-align:left;
+  padding:11px 12px;
+  border-radius:9px;
+  margin-bottom:3px;
+}
+
+.nav-btn:hover,
+.nav-btn.active{
+  background:#1d1530;
+  color:#fff;
+}
+
+.nav-btn.active{
+  border-left:3px solid var(--purple);
+}
+
+/* CONTENT */
+
+main{
+  margin-left:235px;
+  padding:88px 22px 90px;
+  max-width:1500px;
+}
+
+.page{
+  display:none;
+}
+
+.page.active{
+  display:block;
+}
+
+.hero{
+  background:
+    radial-gradient(circle at top right,#3c176b 0,transparent 42%),
+    linear-gradient(135deg,#14101e,#0d0d14);
+  border:1px solid #312345;
+  border-radius:18px;
+  padding:28px;
+  margin-bottom:20px;
+}
+
+.hero h1{
+  font-size:34px;
+  margin-bottom:8px;
+}
+
+.hero h1 span{
+  color:var(--purple);
+}
+
+.hero p{
+  color:var(--muted);
+  line-height:1.6;
+}
+
+/* CARDS */
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:14px;
+}
+
+.card{
+  background:var(--panel);
+  border:1px solid var(--border);
+  border-radius:15px;
+  padding:18px;
+}
+
+.card h3{
+  margin-bottom:8px;
+}
+
+.card p{
+  color:var(--muted);
+  font-size:14px;
+  line-height:1.5;
+}
+
+.stat{
+  font-size:27px;
+  font-weight:900;
+  margin-top:8px;
+}
+
+.section-title{
+  margin:25px 0 12px;
+  font-size:21px;
+}
+
+/* BUTTONS */
+
+.btn{
+  border:0;
+  border-radius:10px;
+  padding:10px 14px;
+  background:var(--purple);
+  color:white;
+  font-weight:bold;
+}
+
+.btn:hover{
+  background:#9d72ff;
+}
+
+.btn.secondary{
+  background:#1b1b27;
+  border:1px solid var(--border);
+}
+
+.btn.danger{
+  background:#381719;
+  color:#ff9a9a;
+  border:1px solid #662528;
+}
+
+.btn.green{
+  background:#12351f;
+  color:#75e99b;
+  border:1px solid #1d6337;
+}
+
+.btn.yellow{
+  background:#382f0e;
+  color:#ffe66b;
+  border:1px solid #675718;
+}
+
+/* FORMS */
+
+.form{
+  background:var(--panel);
+  border:1px solid var(--border);
+  padding:18px;
+  border-radius:15px;
+}
+
+.field{
+  margin-bottom:13px;
+}
+
+.field label{
+  display:block;
+  font-size:13px;
+  color:#b9b9c8;
+  margin-bottom:6px;
+}
+
+input,
+textarea,
+select{
+  width:100%;
+  background:#0a0a10;
+  border:1px solid #303043;
+  color:white;
+  border-radius:9px;
+  padding:11px 12px;
+  outline:none;
+}
+
+input:focus,
+textarea:focus,
+select:focus{
+  border-color:var(--purple);
+}
+
+textarea{
+  min-height:100px;
+  resize:vertical;
+}
+
+/* TABLE */
+
+.table-wrap{
+  overflow-x:auto;
+}
+
+table{
+  width:100%;
+  border-collapse:collapse;
+  min-width:600px;
+}
+
+th,td{
+  padding:12px;
+  border-bottom:1px solid var(--border);
+  text-align:left;
+}
+
+th{
+  color:#aaaabd;
+  font-size:12px;
+}
+
+/* LOGIN */
+
+#loginPage{
+  position:fixed;
+  inset:0;
+  background:
+    radial-gradient(circle at 50% 10%,#34135d 0,transparent 35%),
+    #07070b;
+  z-index:2000;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+}
+
+.login-box{
+  width:100%;
+  max-width:430px;
+  background:#101018;
+  border:1px solid #30243e;
+  border-radius:20px;
+  padding:25px;
+  box-shadow:0 20px 70px rgba(0,0,0,.5);
+}
+
+.login-logo{
+  text-align:center;
+  font-size:32px;
+  font-weight:900;
+  margin-bottom:5px;
+}
+
+.login-logo span{
+  color:var(--purple);
+}
+
+.login-sub{
+  text-align:center;
+  color:#858596;
+  margin-bottom:25px;
+}
+
+.login-tabs{
+  display:flex;
+  gap:6px;
+  margin-bottom:18px;
+}
+
+.login-tabs button{
+  flex:1;
+  background:#171720;
+  color:#aaa;
+  border:1px solid var(--border);
+  padding:10px;
+  border-radius:9px;
+}
+
+.login-tabs button.active{
+  background:#28154b;
+  color:white;
+  border-color:#6435a1;
+}
+
+.login-error{
+  color:#ff8585;
+  font-size:13px;
+  margin-bottom:10px;
+  min-height:18px;
+}
+
+/* MARKET */
+
+.market-item{
+  background:var(--panel);
+  border:1px solid var(--border);
+  border-radius:14px;
+  padding:15px;
+  margin-bottom:10px;
+}
+
+.market-top{
+  display:flex;
+  justify-content:space-between;
+  gap:10px;
+  margin-bottom:7px;
+}
+
+.market-user{
+  color:var(--purple);
+  font-weight:bold;
+}
+
+.market-meta{
+  color:#89899a;
+  font-size:12px;
+}
+
+/* NIGHT MARKET */
+
+.night-box{
+  border-radius:15px;
+  padding:17px;
+  min-height:130px;
+  color:#111;
+}
+
+.night-yellow{
+  background:#facc15;
+}
+
+.night-green{
+  background:#22c55e;
+}
+
+.night-red{
+  background:#ef4444;
+}
+
+.night-box h3{
+  margin-bottom:7px;
+}
+
+.night-item{
+  background:rgba(0,0,0,.16);
+  border-radius:9px;
+  padding:9px;
+  margin-top:7px;
+}
+
+/* CHAT */
+
+.chat-box{
+  height:520px;
+  display:flex;
+  flex-direction:column;
+  background:#0e0e15;
+  border:1px solid var(--border);
+  border-radius:15px;
+  overflow:hidden;
+}
+
+.chat-header{
+  padding:13px 16px;
+  background:#15151f;
+  border-bottom:1px solid var(--border);
+  font-weight:bold;
+}
+
+.chat-messages{
+  flex:1;
+  overflow-y:auto;
+  padding:15px;
+}
+
+.chat-message{
+  margin-bottom:13px;
+  line-height:1.45;
+}
+
+.chat-name{
+  color:var(--purple);
+  font-weight:bold;
+}
+
+.chat-time{
+  color:#666677;
+  font-size:10px;
+  margin-left:5px;
+}
+
+.chat-input{
+  display:flex;
+  gap:8px;
+  padding:10px;
+  border-top:1px solid var(--border);
+}
+
+.chat-input input{
+  flex:1;
+}
+
+/* ANNOUNCEMENT */
+
+.announcement{
+  position:fixed;
+  top:75px;
+  left:50%;
+  transform:translateX(-50%);
+  width:min(650px,calc(100% - 30px));
+  background:#181126;
+  border:1px solid #7547b5;
+  border-radius:13px;
+  padding:14px 16px;
+  z-index:1500;
+  box-shadow:0 15px 50px rgba(0,0,0,.45);
+}
+
+.announcement strong{
+  color:#b991ff;
+}
+
+.announcement .count{
+  float:right;
+  color:#aaa;
+  font-size:12px;
+}
+
+/* MODAL */
+
+.modal{
+  display:none;
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.75);
+  z-index:3000;
+  align-items:center;
+  justify-content:center;
+  padding:18px;
+}
+
+.modal.show{
+  display:flex;
+}
+
+.modal-box{
+  width:100%;
+  max-width:500px;
+  background:#11111a;
+  border:1px solid #38384c;
+  border-radius:16px;
+  padding:20px;
+}
+
+.modal-head{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:15px;
+}
+
+.close{
+  background:transparent;
+  border:0;
+  color:#aaa;
+  font-size:22px;
+}
+
+/* TOAST */
+
+#toast{
+  position:fixed;
+  left:50%;
+  bottom:25px;
+  transform:translateX(-50%) translateY(100px);
+  background:#171720;
+  border:1px solid #3a3a4d;
+  padding:11px 16px;
+  border-radius:10px;
+  z-index:5000;
+  transition:.25s;
+  opacity:0;
+}
+
+#toast.show{
+  opacity:1;
+  transform:translateX(-50%) translateY(0);
+}
+
+/* MOBILE NAV */
+
+.bottom-nav{
+  display:none;
+  position:fixed;
+  left:0;
+  right:0;
+  bottom:0;
+  height:64px;
+  background:#0d0d14;
+  border-top:1px solid var(--border);
+  z-index:1000;
+  overflow-x:auto;
+}
+
+.bottom-nav button{
+  flex:1;
+  min-width:75px;
+  border:0;
+  background:transparent;
+  color:#888899;
+  font-size:11px;
+}
+
+.bottom-nav button.active{
+  color:#fff;
+  background:#1a1229;
+}
+
+/* RESPONSIVE */
+
+@media(max-width:800px){
+  header{
+    height:58px;
+  }
+
+  .sidebar{
+    display:none;
+  }
+
+  main{
+    margin-left:0;
+    padding:75px 12px 82px;
+  }
+
+  .bottom-nav{
+    display:flex;
+  }
+
+  .hero{
+    padding:20px;
+  }
+
+  .hero h1{
+    font-size:27px;
+  }
+
+  .header-user .logout-btn{
+    display:none;
+  }
+
+  .user-badge{
+    max-width:140px;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+  }
+
+  .chat-box{
+    height:calc(100vh - 180px);
+    min-height:400px;
+  }
+}
 </style>
 </head>
+
 <body>
-<div class="authScreen" id="authScreen">
-  <div class="authBox">
-    <div class="authLogo">💜 <span>VaXeD</span></div>
-    <div style="text-align:center;color:#aaa1b8">KolicHub Topluluk Merkezi</div>
-    <div class="authTabs">
-      <button id="loginTab" class="active" onclick="showAuth('login')">Giriş Yap</button>
-      <button id="registerTab" onclick="showAuth('register')">Kayıt Ol</button>
+
+<!-- LOGIN -->
+
+<div id="loginPage">
+
+  <div class="login-box">
+
+    <div class="login-logo">
+      VaXeD<span>Hub</span>
     </div>
-    <div id="loginForm" class="authForm active">
-      <div class="field"><label>Kullanıcı adı</label><input id="loginUser" maxlength="24" placeholder="Kullanıcı adın"></div>
-      <div class="field"><label>Şifre</label><input id="loginPass" type="password" maxlength="72" placeholder="Şifren"></div>
-      <button class="btn primary" style="width:100%" onclick="loginUser()">🔐 Giriş Yap</button>
+
+    <div class="login-sub">
+      KolicHub topluluk platformu
     </div>
-    <div id="registerForm" class="authForm">
-      <div class="field"><label>Kullanıcı adı</label><input id="regUser" maxlength="24" placeholder="Kullanıcı adın"></div>
-      <div class="field"><label>Şifre</label><input id="regPass" type="password" maxlength="72" placeholder="Şifren"></div>
-      <div class="field"><label>Şifre tekrar</label><input id="regPass2" type="password" maxlength="72" placeholder="Şifreni tekrar yaz"></div>
-      <button class="btn primary" style="width:100%" onclick="registerUser()">📝 Kayıt Ol</button>
+
+    <div class="login-tabs">
+      <button id="loginTab" class="active" onclick="showLogin()">Giriş Yap</button>
+      <button id="registerTab" onclick="showRegister()">Kayıt Ol</button>
     </div>
-    <div class="authMsg" id="authMsg"></div>
-    <p class="small" style="text-align:center;margin:15px 0 0">Bu sürüm hesapları bu tarayıcıda saklar.</p>
+
+    <div id="loginForm">
+
+      <div class="field">
+        <label>Kullanıcı adı</label>
+        <input id="loginUsername" placeholder="Örn: thedarklord">
+      </div>
+
+      <div class="field">
+        <label>Şifre</label>
+        <input id="loginPassword" type="password" placeholder="Şifren">
+      </div>
+
+      <div id="loginError" class="login-error"></div>
+
+      <button class="btn" style="width:100%" onclick="login()">
+        Giriş Yap
+      </button>
+
+    </div>
+
+    <div id="registerForm" style="display:none">
+
+      <div class="field">
+        <label>Kullanıcı adı</label>
+        <input id="registerUsername" placeholder="Örn: messi">
+      </div>
+
+      <div class="field">
+        <label>Şifre</label>
+        <input id="registerPassword" type="password" placeholder="Şifre oluştur">
+      </div>
+
+      <div class="field">
+        <label>Şifre tekrar</label>
+        <input id="registerPassword2" type="password" placeholder="Şifre tekrar">
+      </div>
+
+      <div id="registerError" class="login-error"></div>
+
+      <button class="btn" style="width:100%" onclick="register()">
+        Kayıt Ol
+      </button>
+
+    </div>
+
   </div>
-</div>
-<header class="header"><div class="head"><div class="logo">💜 <span>VaXeD</span> / KolicHub</div><div class="userPill"><div class="pill" id="status">Topluluk Merkezi</div><button class="logoutBtn" onclick="logoutUser()">Çıkış</button></div></div></header>
-<div class="topmenu" id="topmenu"></div>
-<div class="layout"><aside class="side" id="side"></aside><main id="main">
-<section class="page active" id="p-home"><div class="hero"><h1>💜 VaXeD / KolicHub</h1><p class="muted">Bağımsız Minecraft topluluk merkezi.</p><div class="card"><h2>🎮 KolicHub</h2><div class="ip">🌐 kolichub.net</div><div class="actions"><button class="btn primary" onclick="copyText('kolichub.net')">📋 IP KOPYALA</button><a class="btn" href="https://discord.gg/koluchub" target="_blank">💬 KolicHub Discord</a><a class="btn" href="https://discord.gg/VaXeD" target="_blank">💜 VaXeD Discord</a></div></div></div><div class="grid"><div class="card"><h3>🎁 Satın Alımlar</h3><p>Gizemli Kutu ve diğer kutular.</p><button class="btn primary" onclick="go('p-purchases')">Kutuları Gör</button></div><div class="card"><h3>🔄 Trade</h3><p>IGN ve Discord adı ile trade ilanı oluştur.</p><button class="btn" onclick="go('p-trade')">Trade Merkezi</button></div><div class="card"><h3>🎫 Destek</h3><p>Lütfen ticket açınız.</p></div></div></section>
-<section class="page" id="p-purchases"><div class="hero"><h1>🎁 Satın Alımlar</h1><p class="muted">Kutuya dokununca Pay komutlarını görebilirsin.</p></div><div class="grid" id="boxes"></div><div class="empty">🎫 Satın alım veya destek için <b>lütfen ticket açınız.</b></div></section>
-<section class="page" id="p-night"><div class="hero"><h1>🌙 Gece Pazarı</h1></div><div class="grid"><div class="card"><h3>💎 Elmas Paketi</h3><p>Topluluk bilgi alanı.</p></div><div class="card"><h3>🟩 Zümrüt Sandığı</h3><p>Topluluk bilgi alanı.</p></div><div class="card"><h3>⬛ Obsidyen Seti</h3><p>Topluluk bilgi alanı.</p></div></div></section>
-<section class="page" id="p-market"><div class="hero"><h1>🛒 Oyuncu Pazarı</h1><button class="btn primary" onclick="marketForm()">➕ İlan Ekle</button></div><div class="grid" id="marketList"></div></section>
-<section class="page" id="p-trade"><div class="hero"><h1>🔄 Trade Merkezi</h1><p class="muted">Sadece IGN, Discord adı, verilen eşya ve istenen eşya.</p><button class="btn primary" onclick="tradeForm()">➕ Trade İlanı</button></div><div class="grid" id="tradeList"></div></section>
 
-<section class="page" id="p-chat">
-<div class="hero">
-  <h1>💬 Oyuncu Sohbeti</h1>
-  <p class="muted">Oyuncular burada birbirleriyle sohbet edebilir.</p><div class="tag">🟡 Demo sohbet: bu HTML sürümünde veriler tarayıcıda tutulur.</div>
-  <div class="field"><label>Görünen adın</label><input id="chatName" readonly placeholder="Giriş yaptığın kullanıcı adı"></div>
-  <span id="chatStatus" class="small"></span>
 </div>
-<div class="card">
-  <div id="announcementBox"></div>
-  <div id="chatList" style="max-height:420px;overflow:auto"></div>
-  <div class="actions" style="margin-top:10px">
-    <input id="chatInput" maxlength="300" placeholder="Mesajını yaz..." onkeydown="if(event.key==='Enter')sendChat()">
-    <button class="btn primary" onclick="sendChat()">Gönder</button>
+
+
+<!-- HEADER -->
+
+<header>
+
+  <div class="logo">
+    VaXeD<span>Hub</span>
   </div>
-</div>
-</section>
 
-<section class="page" id="p-players"><div class="hero"><h1>👥 Oyuncular</h1><input placeholder="Oyuncu ara..." oninput="filterCards(this,'playersList')"></div><div class="grid" id="playersList"><div class="card"><h3>👤 Zheckolic</h3><span class="tag">Topluluk</span></div><div class="card"><h3>👤 Caner</h3><span class="tag">Topluluk</span></div><div class="card"><h3>👤 dryosun</h3><span class="tag">Topluluk</span></div><div class="card"><h3>👤 an0x713</h3><span class="tag">Topluluk</span></div></div></section>
-<section class="page" id="p-items"><div class="hero"><h1>💎 Eşyalar</h1></div><div class="grid"><div class="card"><h3>💎 Diamond</h3><p>Topluluk eşya bilgisi.</p></div><div class="card"><h3>🟩 Emerald</h3><p>Topluluk eşya bilgisi.</p></div><div class="card"><h3>⬛ Obsidian</h3><p>Topluluk eşya bilgisi.</p></div><div class="card"><h3>🟨 Gold Ingot</h3><p>Topluluk eşya bilgisi.</p></div></div></section>
-<section class="page" id="p-calculators"><div class="hero"><h1>🧮 Hesaplayıcılar</h1></div><div class="grid"><div class="card"><h3>📦 Stack</h3><input id="stack" type="number" placeholder="128"><br><br><button class="btn primary" onclick="calcStack()">Hesapla</button><p id="stackOut"></p></div><div class="card"><h3>⏱️ Süre</h3><input id="mins" type="number" placeholder="60"><br><br><button class="btn primary" onclick="calcTime()">Hesapla</button><p id="timeOut"></p></div></div></section>
-<section class="page" id="p-farm"><div class="hero"><h1>🌾 Farm Rehberleri</h1></div><div class="grid"><div class="card"><h3>🌱 Kelp Farmı</h3><p>Kurulum ve materyal bilgileri.</p></div><div class="card"><h3>🎋 Bambu Farmı</h3><p>Kurulum ve materyal bilgileri.</p></div><div class="card"><h3>🦴 Kemik Tozu Farmı</h3><p>Kurulum ve materyal bilgileri.</p></div><div class="card"><h3>⛓️ Demir Farmı</h3><p>Kurulum ve materyal bilgileri.</p></div></div></section>
-<section class="page" id="p-guides"><div class="hero"><h1>📚 Rehberler</h1></div><div class="grid"><div class="card"><h3>🌱 Başlangıç</h3><p>Topluluk rehberi.</p></div><div class="card"><h3>🔄 Takas</h3><p>Topluluk rehberi.</p></div><div class="card"><h3>🌾 Farming</h3><p>Topluluk rehberi.</p></div><div class="card"><h3>🛡️ Güvenlik</h3><p>Topluluk rehberi.</p></div></div></section>
-<section class="page" id="p-commands"><div class="hero"><h1>⌨️ Komutlar</h1><input placeholder="Komut ara..." oninput="filterCards(this,'commandsList')"></div><div class="grid" id="commandsList"><div class="card"><h3>/spawn</h3><p>Başlangıç noktasına git.</p><button class="btn" onclick="copyText('/spawn')">Kopyala</button></div><div class="card"><h3>/home</h3><p>Ev noktasını kullan.</p><button class="btn" onclick="copyText('/home')">Kopyala</button></div><div class="card"><h3>/shop</h3><p>Mağazayı aç.</p><button class="btn" onclick="copyText('/shop')">Kopyala</button></div></div></section>
-<section class="page" id="p-events"><div class="hero"><h1>📅 Etkinlikler</h1></div><div class="grid"><div class="card"><h3>🎉 Topluluk Etkinliği</h3><span class="tag">Yakında</span></div><div class="card"><h3>💜 KolicHub Etkinliği</h3><span class="tag">Yakında</span></div></div></section>
-<section class="page" id="p-codes"><div class="hero"><h1>🎟️ Kodlar</h1></div><div class="grid"><div class="card"><h3>KOLIC2026</h3><button class="btn" onclick="copyText('KOLIC2026')">Kopyala</button></div><div class="card"><h3>VAXED2026</h3><button class="btn" onclick="copyText('VAXED2026')">Kopyala</button></div></div></section>
-<section class="page" id="p-giveaway"><div class="hero"><h1>🎉 Çekilişler</h1><p>Ücretsiz topluluk etkinlikleri.</p></div><div class="grid"><div class="card"><h3>🌟 Gizemli Kutu</h3><button class="btn primary" onclick="toast('Katılım kaydedildi')">Katıl</button></div><div class="card"><h3>💜 KolicHub Rozeti</h3><button class="btn primary" onclick="toast('Katılım kaydedildi')">Katıl</button></div></div></section>
-<section class="page" id="p-achievements"><div class="hero"><h1>🏆 Başarımlar</h1></div><div class="grid"><div class="card"><h3>🏅 İlk Takas</h3></div><div class="card"><h3>🏅 İlk İlan</h3></div><div class="card"><h3>🏅 Farm Ustası</h3></div></div></section>
-<section class="page" id="p-reports"><div class="hero"><h1>🚨 Bildirimler</h1><p>Rapor gönderilmesi kişiyi otomatik olarak scammer ilan etmez.</p><button class="btn primary" onclick="reportForm()">➕ Oyuncu Bildir</button> <button class="btn" onclick="scammerForm()">➕ Scammer Ekle</button></div><div class="grid" id="reportList"></div></section>
-<section class="page" id="p-discord"><div class="hero"><h1>💬 Discord</h1></div><div class="grid"><div class="card"><h3>💜 VaXeD</h3><a class="btn primary" href="https://discord.gg/VaXeD" target="_blank">Discord'a Katıl</a></div><div class="card"><h3>🟣 KolicHub</h3><a class="btn primary" href="https://discord.gg/koluchub" target="_blank">Discord'a Katıl</a></div></div></section>
-<section class="page" id="p-settings"><div class="hero"><h1>⚙️ Ayarlar</h1><p>Hesabını ve oturumunu yönet.</p></div><div class="card"><button class="btn danger" onclick="resetSite()">Site verilerini sıfırla</button></div></section>
-<section class="page" id="p-admin"><div class="hero"><h1>🛡️ Admin Paneli</h1><p>Admin işlemleri sadece bu web sitesindeki içerikleri yönetir.</p><button class="btn primary" onclick="adminLogin()">Admin Girişi</button></div><div id="adminArea"></div></section>
-</main></div><nav class="bottom" id="bottom"></nav>
-<div class="modal" id="modal"><div class="modalbox" id="modalbox"></div></div><div class="toast" id="toast"></div>
-<script>
-(function(){
-var KEY='vaxed_kolichub_final';var admin=false;
-var AUTH_KEY='vaxed_kolichub_accounts_v1';
-var SESSION_KEY='vaxed_kolichub_session_v1';
-function getAccounts(){try{return JSON.parse(localStorage.getItem(AUTH_KEY)||'[]')}catch(e){return[]}}
-function setAccounts(a){localStorage.setItem(AUTH_KEY,JSON.stringify(a))}
-function authMsg(t){var e=document.getElementById('authMsg');if(e)e.textContent=t}
-function showAuth(mode){
-  document.getElementById('loginForm').classList.toggle('active',mode==='login');
-  document.getElementById('registerForm').classList.toggle('active',mode==='register');
-  document.getElementById('loginTab').classList.toggle('active',mode==='login');
-  document.getElementById('registerTab').classList.toggle('active',mode==='register');
-  authMsg('');
-}
-window.showAuth=showAuth;
-function validUsername(u){return /^[A-Za-z0-9_ğüşöçıİĞÜŞÖÇ-]{3,24}$/.test(u)}
-function registerUser(){
-  var u=document.getElementById('regUser').value.trim();
-  var p=document.getElementById('regPass').value;
-  var p2=document.getElementById('regPass2').value;
-  if(!validUsername(u))return authMsg('Kullanıcı adı 3-24 karakter olmalı.');
-  if(p.length<4)return authMsg('Şifre en az 4 karakter olmalı.');
-  if(p!==p2)return authMsg('Şifreler eşleşmiyor.');
-  var a=getAccounts();
-  if(a.some(function(x){return x.user.toLowerCase()===u.toLowerCase()}))return authMsg('Bu kullanıcı adı zaten kayıtlı.');
-  a.push({user:u,pass:p});
-  setAccounts(a);
-  localStorage.setItem(SESSION_KEY,u);
-  startAuthenticated(u);
-}
-function loginUser(){
-  var u=document.getElementById('loginUser').value.trim(),p=document.getElementById('loginPass').value;
-  var a=getAccounts(),x=a.find(function(v){return v.user.toLowerCase()===u.toLowerCase()&&v.pass===p});
-  if(!x)return authMsg('Kullanıcı adı veya şifre yanlış.');
-  localStorage.setItem(SESSION_KEY,x.user);
-  startAuthenticated(x.user);
-}
-function startAuthenticated(u){
-  document.getElementById('authScreen').style.display='none';
-  document.getElementById('status').textContent='👤 '+u;
-  chatName=u;
-  localStorage.setItem('vaxed_chat_name',u);
-  renderChat();
-}
-function logoutUser(){
-  localStorage.removeItem(SESSION_KEY);
-  location.reload();
-}
-function requireAuth(){
-  var u=localStorage.getItem(SESSION_KEY);
-  if(!u){document.getElementById('authScreen').style.display='flex';return}
-  startAuthenticated(u);
-}
-window.loginUser=loginUser;window.registerUser=registerUser;window.logoutUser=logoutUser;
+  <div class="header-user">
 
-var NAV=[['home','🏠 Ana Sayfa'],['purchases','🎁 Satın Alımlar'],['night','🌙 Gece Pazarı'],['market','🛒 Oyuncu Pazarı'],['trade','🔄 Trade Merkezi'],['chat','💬 Oyuncu Sohbeti'],['players','👥 Oyuncular'],['items','💎 Eşyalar'],['calculators','🧮 Hesaplayıcılar'],['farm','🌾 Farm Rehberleri'],['guides','📚 Rehberler'],['commands','⌨️ Komutlar'],['events','📅 Etkinlikler'],['codes','🎟️ Kodlar'],['giveaway','🎉 Çekilişler'],['achievements','🏆 Başarımlar'],['reports','🚨 Bildirimler'],['discord','💬 Discord'],['settings','⚙️ Ayarlar'],['admin','🛡️ Admin']];
-var boxes=[{id:1,name:'Gizemli Kutu',icon:'🎁',cmd:['RaveXismc','korkunckamyon']},{id:2,name:'Random Kit Kutusu',icon:'🎒',cmd:['RaveXismc','korkunckamyon']},{id:3,name:'Kaliteli Kutu',icon:'💎',cmd:['RaveXismc','korkunckamyon']},{id:4,name:'Kalitesiz Kutu',icon:'🗑️',cmd:['RaveXismc','korkunckamyon']},{id:5,name:'Random Kutu',icon:'🎲',cmd:['RaveXismc','korkunckamyon']}];
-var trades=[],markets=[],reports=[],scammers=[],chatMessages=[],banned=[],muted=[],announcements=[];var chatName=localStorage.getItem('vaxed_chat_name')||'';
-function esc(s){s=String(s==null?'':s);return s.replace(/[&<>'"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]})}
-function save(){try{localStorage.setItem(KEY,JSON.stringify({boxes:boxes,trades:trades,markets:markets,reports:reports,scammers:scammers,chatMessages:chatMessages,banned:banned,muted:muted,announcements:announcements}))}catch(e){}}
-function load(){try{var x=JSON.parse(localStorage.getItem(KEY)||'null');if(x){if(Array.isArray(x.boxes)&&x.boxes.length)boxes=x.boxes;if(Array.isArray(x.trades))trades=x.trades;if(Array.isArray(x.markets))markets=x.markets;if(Array.isArray(x.reports))reports=x.reports;if(Array.isArray(x.scammers))scammers=x.scammers;if(Array.isArray(x.chatMessages))chatMessages=x.chatMessages;if(Array.isArray(x.banned))banned=x.banned;if(Array.isArray(x.muted))muted=x.muted;if(Array.isArray(x.announcements))announcem
+    <div class="user-badge" id="headerUser">
+      Misafir
+    </div>
+
+    <button class="logout-btn" onclick="logout()">
+      Çıkış
+    </button>
+
+  </div>
+
+</header>
+
+
+<!-- SIDEBAR -->
+
+<aside class="sidebar" id="sidebar"></aside>
+
+
+<!-- MAIN -->
+
+<main id="main">
+
+  <!-- HOME -->
+
+  <section class="page" id="p-home">
+
+    <div class="hero">
+
+      <h1>
+        Kolic<span>Hub</span>
+      </h1>
+
+      <p>
+        VaXeD topluluk sitesi. Market, trade, gece pazarı,
+        sohbet ve topluluk sistemlerine tek yerden ulaş.
+      </p>
+
+      <div style="margin-top:16px;display:flex;gap:8px;flex-wrap:wrap">
+
+        <button class="btn" onclick="go('chat')">
+          💬 Sohbete Git
+        </button>
+
+        <button class="btn secondary" onclick="go('market')">
+          🛒 Market
+        </button>
+
+        <button class="btn secondary" onclick="copyIP()">
+          📋 Sunucu IP'si
+        </button>
+
+      </div>
+
+    </div>
+
+
+    <div class="grid">
+
+      <div class="card">
+        <h3>🌐 Sunucu</h3>
+        <p>Sunucu adresi</p>
+        <div class="stat">kolichub.net</div>
+      </div>
+
+      <div class="card">
+        <h3>💬 Discord</h3>
+        <p>Topluluğa katıl</p>
+        <button class="btn" style="margin-top:10px"
+          onclick="window.open('https://discord.gg/koluchub','_blank')">
+          Discord
+        </button>
+      </div>
+
+      <div class="card">
+        <h3>👤 Hesabım</h3>
+        <p>Site kullanıcı adın</p>
+        <div class="stat" id="homeUsername">-</div>
+      </div>
+
+      <div class="card">
+        <h3>📢 Durum</h3>
+        <p>Platform durumu</p>
+        <div class="stat" style="color:#22c55e">
+          AKTİF
+        </div>
+      </div>
+
+    </div>
+
+
+    <h2 class="section-title">
+      📜 KolicHub Site Kuralları (Betada)
+    </h2>
+
+    <div class="card">
+
+      <p>
+        1. Herkese saygılı davranın.<br><br>
+
+        2. Küfür, hakaret ve spam yasaktır.<br><br>
+
+        3. Dolandırıcılık ve sahte ilan yasaktır.<br><br>
+
+        4. Trade ilanlarında verilen ve istenen item açıkça belirtilmelidir.<br><br>
+
+        5. Şüpheli durumlarda kanıt ile rapor oluşturun.<br><br>
+
+        6. Asılsız rapor oluşturmayın.<br><br>
+
+        7. Satım ve alımlar için VaXeD Ticket açınız.<br><br>
+
+        8. Discord üzerinden destek almak için ticket sistemini kullanın.<br><br>
+
+        9. Kişisel bilgilerinizi paylaşmayın.<br><br>
+
+        10. Kurallara uymayan hesaplara site kısıtlaması veya ban uygulanabilir.<br><br>
+
+        11. Adminler gerekli durumlarda moderasyon yapabilir.<br><br>
+
+        12. Kurallar gerektiğinde güncellenebilir.<br><br>
+
+        Siteyi kullanmanız kuralları kabul ettiğiniz anlamına gelir.
+      </p>
+
+    </div>
+
+  </section>
+
+
+  <!-- PURCHASES -->
+
+  <section class="page" id="p-purchases">
+
+    <div class="hero">
+
+      <h1>📦 Kutu Satın Al</h1>
+
+      <p>
+        Kutu almak için istediğin kutuya tıkla.
+      </p>
+
+    </div>
+
+    <div class="grid" id="boxes"></div>
+
+    <div class="card" style="margin-top:15px">
+
+      <h3>🎫 Destek</h3>
+
+      <p>
+        Lütfen ticket açınız.
+      </p>
+
+      <button class="btn" style="margin-top:10px"
+        onclick="window.open('https://discord.gg/VaXeD','_blank')">
+        VaXeD Ticket
+      </button>
+
+    </div>
+
+  </section>
+
+
+  <!-- NIGHT MARKET -->
+
+  <section class="page" id="p-night">
+
+    <div class="hero">
+
+      <h1>🌙 Gece Pazarı</h1>
+
+      <p>
+        Valorant tarzı renkli gece pazarı sistemi.
+      </p>
+
+    </div>
+
+    <div class="grid" id="nightMarket"></div>
+
+  </section>
+
+
+  <!-- MARKET -->
+
+  <section class="page" id="p-market">
+
+    <div class="hero">
+
+      <h1>🛒 Player Market</h1>
+
+      <p>
+        Oyuncuların oluşturduğu item ilanları.
+      </p>
+
+    </div>
+
+    <div class="form">
+
+      <h3 style="margin-bottom:15px">
+        Yeni ilan oluştur
+      </h3>
+
+      <div class="field">
+        <label>IGN</label>
+        <input id="marketIgn" placeholder="THEDARKLORD">
+      </div>
+
+      <div class="field">
+        <label>Discord</label>
+        <input id="marketDiscord" placeholder="Dr.yosun">
+      </div>
+
+      <div class="field">
+        <label>Item</label>
+        <input id="marketItem" placeholder="Satılan item">
+      </div>
+
+      <div class="field">
+        <label>Açıklama</label>
+        <textarea id="marketDescription"
+          placeholder="İlan açıklaması"></textarea>
+      </div>
+
+      <button class="btn" onclick="addMarket()">
+        İlan Oluştur
+      </button>
+
+    </div>
+
+    <h2 class="section-title">
+      📋 İlanlar
+    </h2>
+
+    <div id="marketList"></div>
+
+  </section>
+
+
+  <!-- TRADE -->
+
+  <section class="page" id="p-trade">
+
+    <div class="hero">
+
+      <h1>🤝 Trade Center</h1>
+
+      <p>
+        Oyuncularla item takası için ilan oluştur.
+      </p>
+
+    </div>
+
+    <div class="form">
+
+      <div class="field">
+        <label>IGN</label>
+        <input id="tradeIgn" placeholder="THEDARKLORD">
+      </div>
+
+      <div class="field">
+        <label>Discord</label>
+        <input id="tradeDiscord" placeholder="Dr.yosun">
+      </div>
+
+      <div class="field">
+        <label>Verdiğim item</label>
+        <input id="tradeGive" placeholder="Verdiğin item">
+      </div>
+
+      <div class="field">
+        <label>İstediğim item</label>
+        <input id="tradeWant" placeholder="İstediğin item">
+      </div>
+
+      <button class="btn" onclick="addTrade()">
+        Trade İlanı Oluştur
+      </button>
+
+    </div>
+
+    <h2 class="section-title">
+      🔄 Trade İlanları
+    </h2>
+
+    <div id="tradeList"></div>
+
+  </section>
+
+
+  <!-- CHAT -->
+
+  <section class="page" id="p-chat">
+
+    <div class="hero">
+
+      <h1>💬 Sohbet</h1>
+
+      <p>
+        Discord tarzı topluluk sohbeti.
+      </p>
+
+    </div>
+
+    <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px">
+
+      <button class="btn secondary" onclick="setChannel('genel')">
+        # genel
+      </button>
+
+      <button class="btn secondary" onclick="setChannel('market')">
+        # market
+      </button>
+
+      <button class="btn secondary" onclick="setChannel('trade')">
+        # trade
+      </button>
+
+      <button class="btn secondary" onclick="setChannel('duyurular')">
+        # duyurular
+      </button>
+
+    </div>
+
+    <div class="chat-box">
+
+      <div class="chat-header" id="chatHeader">
+        # genel
+      </div>
+
+      <div class="chat-messages" id="chatMessages"></div>
+
+      <div class="chat-input">
+
+        <input
+          id="chatInput"
+          placeholder="Mesaj yaz..."
+          onkeydown="if(event.key==='Enter')sendChat()">
+
+        <button class="btn" onclick="sendChat()">
+          Gönder
+        </button>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- PLAYERS -->
+
+  <section class="page" id="p-players">
+
+    <div class="hero">
+
+      <h1>👥 Oyuncular</h1>
+
+      <p>
+        KolicHub site kullanıcıları.
+      </p>
+
+    </div>
+
+    <div id="playersList" class="grid"></div>
+
+  </section>
+
+
+  <!-- ITEMS -->
+
+  <section class="page" id="p-items">
+
+    <div class="hero">
+
+      <h1>🧱 Itemler</h1>
+
+      <p>
+        Topluluk item listesi.
+      </p>
+
+    </div>
+
+    <div class="grid">
+
+      <div class="card">
+        <h3>⚔️ PvP Itemleri</h3>
+        <p>Kılıç, zırh ve diğer savaş itemleri.</p>
+      </div>
+
+      <div class="card">
+        <h3>⛏️ Kaynaklar</h3>
+        <p>Madencilik ve farm kaynakları.</p>
+      </div>
+
+      <div class="card">
+        <h3>💎 Özel Itemler</h3>
+        <p>Sunucu topluluğundaki özel itemler.</p>
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- CALCULATORS -->
+
+  <section class="page" id="p-calculators">
+
+    <div class="hero">
+
+      <h1>🧮 Hesaplayıcılar</h1>
+
+      <p>
+        Basit hesaplama araçları.
+      </p>
+
+    </div>
+
+    <div class="form">
+
+      <div class="field">
+        <label>Sayı 1</label>
+        <input id="calc1" type="number">
+      </div>
+
+      <div class="field">
+        <label>Sayı 2</label>
+        <input id="calc2" type="number">
+      </div>
+
+      <button class="btn" onclick="calculate()">
+        Hesapla
+      </button>
+
+      <div id="calcResult"
+        style="margin-top:15px;font-size:22px;font-weight:bold">
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- FARM -->
+
+  <section class="page" id="p-farm">
+
+    <div class="hero">
+
+      <h1>🌾 Farm Rehberleri</h1>
+
+      <p>
+        Topluluk tarafından hazırlanabilecek farm rehberleri.
+      </p>
+
+    </div>
+
+    <div class="grid">
+
+      <div class="card">
+        <h3>🎋 Bamboo Farm</h3>
+        <p>Basit bamboo farm rehberi.</p>
+      </div>
+
+      <div class="card">
+        <h3>🌿 Kelp Farm</h3>
+        <p>Kelp üretim sistemi.</p>
+      </div>
+
+      <div class="card">
+        <h3>🦴 Bone Meal</h3>
+        <p>Bone meal üretim fikirleri.</p>
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- GUIDES -->
+
+  <section class="page" id="p-guides">
+
+    <div class="hero">
+
+      <h1>📚 Rehberler</h1>
+
+      <p>
+        KolicHub topluluk rehberleri.
+      </p>
+
+    </div>
+
+    <div class="grid">
+
+      <div class="card">
+        <h3>⚔️ PvP Rehberi</h3>
+        <p>PvP için temel bilgiler.</p>
+      </div>
+
+      <div class="card">
+        <h3>🏠 Base Rehberi</h3>
+        <p>Base oluşturma fikirleri.</p>
+      </div>
+
+      <div class="card">
+        <h3>💰 Market Rehberi</h3>
+        <p>Oyuncu marketi kullanım rehberi.</p>
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- COMMANDS -->
+
+  <sect
