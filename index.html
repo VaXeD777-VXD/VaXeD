@@ -2404,12 +2404,341 @@ function renderPlayers(){
     `;
 
     return;
+  {
+el.innerHTML=db.users.map(u=>`
+  <div class="card">
+    <h3>👤 ${esc(u.username)}</h3>
+
+    <p>
+      <b>Discord:</b>
+      ${esc(u.discord || "Belirtilmemiş")}
+    </p>
+
+    <p>
+      <b>Kayıt:</b>
+      ${u.created ? new Date(u.created).toLocaleDateString("tr-TR") : "Bilinmiyor"}
+    </p>
+  </div>
+`).join("");
+
+}
+
+/* =========================
+   RAPORLAR
+========================= */
+
+function addReport(){
+
+  if(!requireLogin()) return;
+
+  const player=document.getElementById("reportPlayer")?.value.trim();
+  const reason=document.getElementById("reportReason")?.value.trim();
+  const evidence=document.getElementById("reportEvidence")?.files?.[0];
+
+  if(!player || !reason){
+    toast("Oyuncu ve sebep gerekli!");
+    return;
   }
 
-  el.innerHTML=db.users.map(u=>`
+  db.reports.push({
+    id:Date.now(),
+    reporter:db.current,
+    player:player,
+    reason:reason,
+    evidence:evidence ? evidence.name : "",
+    date:new Date().toLocaleString("tr-TR")
+  });
+
+  save();
+
+  if(document.getElementById("reportPlayer")){
+    document.getElementById("reportPlayer").value="";
+  }
+
+  if(document.getElementById("reportReason")){
+    document.getElementById("reportReason").value="";
+  }
+
+  toast("Rapor gönderildi!");
+  renderReports();
+}
+
+
+function renderReports(){
+
+  const el=document.getElementById("reportList");
+
+  if(!el) return;
+
+  if(!db.reports.length){
+    el.innerHTML=`
+      <div class="card">
+        <h3>📋 Rapor yok</h3>
+        <p>Henüz gönderilmiş bir rapor bulunmuyor.</p>
+      </div>
+    `;
+    return;
+  }
+
+  el.innerHTML=db.reports.map(r=>`
+    <div class="card">
+      <h3>🚨 ${esc(r.player)}</h3>
+
+      <p>
+        <b>Raporlayan:</b>
+        ${esc(r.reporter)}
+      </p>
+
+      <p>
+        <b>Sebep:</b>
+        ${esc(r.reason)}
+      </p>
+
+      <p>
+        <b>Kanıt:</b>
+        ${esc(r.evidence || "Yok")}
+      </p>
+
+      <small>${esc(r.date || "")}</small>
+
+      ${admin ? `
+        <br><br>
+        <button class="danger" onclick="deleteReport(${r.id})">
+          🗑️ Raporu Sil
+        </button>
+      ` : ""}
+    </div>
+  `).join("");
+}
+
+
+window.deleteReport=function(id){
+
+  if(!admin){
+    toast("Yetkin yok!");
+    return;
+  }
+
+  db.reports=db.reports.filter(r=>r.id!==id);
+
+  save();
+  renderReports();
+
+  toast("Rapor silindi!");
+};
+
+
+/* =========================
+   AYARLAR
+========================= */
+
+function renderSettings(){
+
+  const el=document.getElementById("settingsContent");
+
+  if(!el) return;
+
+  if(!db.current){
+    el.innerHTML=`
+      <div class="card">
+        <h3>🔒 Giriş yapmalısın</h3>
+      </div>
+    `;
+    return;
+  }
+
+  const user=db.users.find(u=>u.username===db.current);
+
+  el.innerHTML=`
+    <div class="card">
+
+      <h2>⚙️ Hesap Ayarları</h2>
+
+      <p>
+        <b>Kullanıcı adı:</b>
+        ${esc(db.current)}
+      </p>
+
+      <p>
+        <b>Discord:</b>
+        ${esc(user?.discord || "Belirtilmemiş")}
+      </p>
+
+      <button onclick="logout()">
+        🚪 Çıkış Yap
+      </button>
+
+    </div>
+  `;
+}
+
+
+/* =========================
+   ADMIN
+========================= */
+
+function renderAdmin(){
+
+  const el=document.getElementById("adminContent");
+
+  if(!el) return;
+
+  if(!admin){
+
+    el.innerHTML=`
+      <div class="card">
+        <h2>🔐 Admin Paneli</h2>
+        <p>Admin paneline erişmek için giriş yapmalısın.</p>
+
+        <button onclick="adminLogin()">
+          🔑 Admin Girişi
+        </button>
+      </div>
+    `;
+
+    return;
+  }
+
+  el.innerHTML=`
 
     <div class="card">
 
-      <h3>👤 ${esc(u.username)}</h3>
+      <h2>🛡️ Admin Paneli</h2>
 
       <p>
+        Hoş geldin <b>Admin</b>.
+      </p>
+
+    </div>
+
+    <div class="card">
+
+      <h3>📢 Duyuru</h3>
+
+      <input
+        id="adminAnnouncement"
+        placeholder="Duyuru yaz..."
+      >
+
+      <input
+        id="announcementSeconds"
+        type="number"
+        min="1"
+        placeholder="Kaç saniye?"
+      >
+
+      <button onclick="createAnnouncement()">
+        📢 Duyuru Yayınla
+      </button>
+
+    </div>
+
+    <div class="card">
+
+      <h3>🌙 Gece Pazarı</h3>
+
+      <button onclick="addNightItem('yellow')">
+        🟡 Sarı item ekle
+      </button>
+
+      <button onclick="addNightItem('green')">
+        🟢 Yeşil item ekle
+      </button>
+
+      <button onclick="addNightItem('red')">
+        🔴 Kırmızı item ekle
+      </button>
+
+    </div>
+
+    <div class="card">
+
+      <h3>📦 Kutular</h3>
+
+      <input
+        id="newBoxName"
+        placeholder="Kutu adı"
+      >
+
+      <input
+        id="newBoxPay"
+        placeholder="Pay adı"
+      >
+
+      <button onclick="addBox()">
+        ➕ Kutu Ekle
+      </button>
+
+    </div>
+
+    <div class="card">
+
+      <h3>👥 Kullanıcılar</h3>
+
+      <p>
+        Toplam kullanıcı:
+        <b>${db.users.length}</b>
+      </p>
+
+    </div>
+
+  `;
+}
+
+
+/* =========================
+   SAYFA AÇILINCA
+========================= */
+
+function refreshPage(){
+
+  updateHeader();
+  buildNav();
+
+  renderAnnouncement();
+  renderBoxes();
+  renderNight();
+  renderTrades();
+  renderMarkets();
+  renderChat();
+  renderPlayers();
+  renderReports();
+  renderSettings();
+  renderAdmin();
+
+}
+
+
+/* =========================
+   BAŞLAT
+========================= */
+
+document.addEventListener("DOMContentLoaded",()=>{
+
+  load();
+
+  updateHeader();
+  buildNav();
+
+  renderAnnouncement();
+  renderBoxes();
+  renderNight();
+  renderTrades();
+  renderMarkets();
+  renderChat();
+  renderPlayers();
+  renderReports();
+  renderSettings();
+  renderAdmin();
+
+  if(db.current){
+    go("home");
+  }else{
+    go("login");
+  }
+
+});
+</script>
+
+</body>
+</html>
