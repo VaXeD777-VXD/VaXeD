@@ -1283,3 +1283,1133 @@ th{
 </div>
 
 </section>
+<script>
+/* =========================================================
+   VaXeDHub / KolicHub - PARÇA 3/3
+   Ana JavaScript
+   ========================================================= */
+
+const KEY = "vaxed_kolichub_login_v2";
+const ADMIN_PASS = "V6559";
+
+const CHANNELS = ["genel", "market", "trade", "duyurular"];
+
+let db = {
+  users: [],
+  current: null,
+
+  boxes: [
+    {id:1, name:"Gizemli Kutu", pay:"RaveXismc"},
+    {id:2, name:"Random Kit kutusu", pay:"Korkunckamyon"},
+    {id:3, name:"Kaliteli kutu", pay:"RaveXismc"},
+    {id:4, name:"Kalitesiz kutu", pay:"Korkunckamyon"},
+    {id:5, name:"Random kutu", pay:"RaveXismc"}
+  ],
+
+  night: {
+    yellow: [],
+    green: [],
+    red: []
+  },
+
+  markets: [],
+  trades: [],
+  reports: [],
+  scammers: [],
+
+  chat: {
+    genel: [],
+    market: [],
+    trade: [],
+    duyurular: []
+  },
+
+  muted: [],
+  banned: [],
+  announcements: []
+};
+
+let admin = false;
+let currentChannel = "genel";
+
+function save(){
+  localStorage.setItem(KEY, JSON.stringify(db));
+}
+
+function load(){
+  try{
+    const x = localStorage.getItem(KEY);
+
+    if(x){
+      const parsed = JSON.parse(x);
+
+      db = Object.assign(db, parsed);
+
+      if(!Array.isArray(db.users)) db.users=[];
+      if(!Array.isArray(db.boxes)) db.boxes=[];
+      if(!Array.isArray(db.markets)) db.markets=[];
+      if(!Array.isArray(db.trades)) db.trades=[];
+      if(!Array.isArray(db.reports)) db.reports=[];
+      if(!Array.isArray(db.scammers)) db.scammers=[];
+      if(!Array.isArray(db.muted)) db.muted=[];
+      if(!Array.isArray(db.banned)) db.banned=[];
+      if(!Array.isArray(db.announcements)) db.announcements=[];
+
+      if(!db.night) db.night={yellow:[],green:[],red:[]};
+
+      if(!Array.isArray(db.night.yellow)) db.night.yellow=[];
+      if(!Array.isArray(db.night.green)) db.night.green=[];
+      if(!Array.isArray(db.night.red)) db.night.red=[];
+
+      if(!db.chat) db.chat={};
+
+      CHANNELS.forEach(c=>{
+        if(!Array.isArray(db.chat[c])) db.chat[c]=[];
+      });
+    }
+  }catch(e){
+    console.log(e);
+  }
+}
+
+function esc(text){
+  return String(text ?? "")
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
+}
+
+function toast(message){
+  const t=document.getElementById("toast");
+
+  if(!t) return;
+
+  t.textContent=message;
+  t.classList.add("show");
+
+  clearTimeout(window.toastTimer);
+
+  window.toastTimer=setTimeout(()=>{
+    t.classList.remove("show");
+  },2500);
+}
+
+function copyText(text){
+  if(navigator.clipboard){
+    navigator.clipboard.writeText(text)
+      .then(()=>toast("Kopyalandı!"))
+      .catch(()=>fallbackCopy(text));
+  }else{
+    fallbackCopy(text);
+  }
+}
+
+function fallbackCopy(text){
+  const area=document.createElement("textarea");
+  area.value=text;
+  document.body.appendChild(area);
+  area.select();
+
+  try{
+    document.execCommand("copy");
+    toast("Kopyalandı!");
+  }catch(e){
+    toast("Kopyalama başarısız.");
+  }
+
+  area.remove();
+}
+
+function copyIP(){
+  copyText("kolichub.net");
+}
+
+function go(id){
+  if(!id) return;
+
+  if(!id.startsWith("p-")){
+    id="p-"+id;
+  }
+
+  document.querySelectorAll(".page").forEach(p=>{
+    p.classList.remove("active");
+  });
+
+  const page=document.getElementById(id);
+
+  if(page){
+    page.classList.add("active");
+  }
+
+  document.querySelectorAll(".nav-btn").forEach(b=>{
+    b.classList.toggle("active", b.dataset.page===id);
+  });
+
+  document.querySelectorAll(".bottom-nav button").forEach(b=>{
+    b.classList.toggle("active", b.dataset.page===id);
+  });
+
+  renderCurrentPage();
+  window.scrollTo(0,0);
+}
+
+function buildNav(){
+
+  const sidebar=document.getElementById("sidebar");
+
+  if(!sidebar) return;
+
+  const groups=[
+    {
+      title:"Ana",
+      items:[
+        ["home","🏠 Ana Sayfa"],
+        ["purchases","📦 Kutular"],
+        ["night","🌙 Gece Pazarı"],
+        ["market","🛒 Player Market"],
+        ["trade","🤝 Trade"],
+        ["chat","💬 Sohbet"]
+      ]
+    },
+    {
+      title:"Topluluk",
+      items:[
+        ["players","👥 Oyuncular"],
+        ["items","🧱 Itemler"],
+        ["calculators","🧮 Hesaplayıcı"],
+        ["farm","🌾 Farm"],
+        ["guides","📚 Rehberler"],
+        ["commands","⌨️ Komutlar"],
+        ["events","📅 Etkinlikler"],
+        ["codes","🎁 Kodlar"],
+        ["giveaway","🎉 Çekiliş"],
+        ["achievements","🏆 Başarımlar"]
+      ]
+    },
+    {
+      title:"Diğer",
+      items:[
+        ["reports","🚨 Raporlar"],
+        ["discord","💜 Discord"],
+        ["settings","⚙️ Ayarlar"],
+        ["admin","🛠️ Admin"]
+      ]
+    }
+  ];
+
+  sidebar.innerHTML="";
+
+  groups.forEach(group=>{
+
+    const title=document.createElement("div");
+    title.className="nav-title";
+    title.textContent=group.title;
+    sidebar.appendChild(title);
+
+    group.items.forEach(item=>{
+
+      const b=document.createElement("button");
+
+      b.className="nav-btn";
+      b.dataset.page="p-"+item[0];
+      b.textContent=item[1];
+
+      b.onclick=()=>{
+        if(item[0]==="admin" && !admin){
+          adminLogin();
+          return;
+        }
+
+        go(item[0]);
+      };
+
+      sidebar.appendChild(b);
+    });
+  });
+}
+
+function buildBottomNav(){
+
+  let nav=document.getElementById("bottomNav");
+
+  if(!nav){
+
+    nav=document.createElement("nav");
+
+    nav.id="bottomNav";
+    nav.className="bottom-nav";
+
+    document.body.appendChild(nav);
+  }
+
+  const items=[
+    ["home","🏠"],
+    ["market","🛒"],
+    ["trade","🤝"],
+    ["chat","💬"],
+    ["admin","🛠️"]
+  ];
+
+  nav.innerHTML="";
+
+  items.forEach(item=>{
+
+    const b=document.createElement("button");
+
+    b.dataset.page="p-"+item[0];
+    b.textContent=item[1];
+
+    b.onclick=()=>{
+
+      if(item[0]==="admin" && !admin){
+        adminLogin();
+        return;
+      }
+
+      go(item[0]);
+    };
+
+    nav.appendChild(b);
+  });
+}
+
+function updateHeader(){
+
+  const h=document.getElementById("headerUser");
+  const home=document.getElementById("homeUsername");
+
+  if(db.current){
+    if(h) h.textContent="👤 "+db.current;
+    if(home) home.textContent=db.current;
+  }else{
+    if(h) h.textContent="Misafir";
+    if(home) home.textContent="-";
+  }
+}
+
+function requireLogin(){
+
+  if(!db.current){
+
+    renderLogin();
+
+    toast("Önce giriş yapmalısın.");
+
+    return false;
+  }
+
+  return true;
+}
+
+/* =========================
+   LOGIN
+========================= */
+
+function showLogin(){
+
+  document.getElementById("loginForm").style.display="block";
+  document.getElementById("registerForm").style.display="none";
+
+  document.getElementById("loginTab").classList.add("active");
+  document.getElementById("registerTab").classList.remove("active");
+}
+
+function showRegister(){
+
+  document.getElementById("loginForm").style.display="none";
+  document.getElementById("registerForm").style.display="block";
+
+  document.getElementById("loginTab").classList.remove("active");
+  document.getElementById("registerTab").classList.add("active");
+}
+
+function renderLogin(){
+
+  const lp=document.getElementById("loginPage");
+
+  if(lp){
+    lp.style.display=db.current ? "none" : "flex";
+  }
+}
+
+function login(){
+
+  const username=document.getElementById("loginUsername").value.trim();
+  const password=document.getElementById("loginPassword").value;
+
+  const error=document.getElementById("loginError");
+
+  if(!username || !password){
+
+    error.textContent="Kullanıcı adı ve şifre gerekli.";
+
+    return;
+  }
+
+  const user=db.users.find(u=>
+    u.username.toLowerCase()===username.toLowerCase()
+    && u.password===password
+  );
+
+  if(!user){
+
+    error.textContent="Kullanıcı adı veya şifre yanlış.";
+
+    return;
+  }
+
+  if(db.banned.includes(user.username)){
+
+    error.textContent="Bu hesap site tarafından yasaklandı.";
+
+    return;
+  }
+
+  db.current=user.username;
+
+  save();
+
+  error.textContent="";
+
+  renderLogin();
+  updateHeader();
+
+  toast("Giriş başarılı!");
+
+  go("home");
+}
+
+function register(){
+
+  const username=document.getElementById("registerUsername").value.trim();
+  const password=document.getElementById("registerPassword").value;
+  const password2=document.getElementById("registerPassword2").value;
+
+  const error=document.getElementById("registerError");
+
+  if(username.length<3){
+
+    error.textContent="Kullanıcı adı en az 3 karakter olmalı.";
+
+    return;
+  }
+
+  if(password.length<4){
+
+    error.textContent="Şifre en az 4 karakter olmalı.";
+
+    return;
+  }
+
+  if(password!==password2){
+
+    error.textContent="Şifreler eşleşmiyor.";
+
+    return;
+  }
+
+  if(db.users.some(u=>
+    u.username.toLowerCase()===username.toLowerCase()
+  )){
+
+    error.textContent="Bu kullanıcı adı zaten kullanılıyor.";
+
+    return;
+  }
+
+  db.users.push({
+    username:username,
+    password:password,
+    joined:new Date().toLocaleDateString("tr-TR")
+  });
+
+  db.current=username;
+
+  save();
+
+  renderLogin();
+  updateHeader();
+
+  toast("Hesap oluşturuldu!");
+
+  go("home");
+}
+
+function logout(){
+
+  db.current=null;
+  admin=false;
+
+  save();
+
+  updateHeader();
+  renderLogin();
+
+  toast("Çıkış yapıldı.");
+}
+
+/* =========================
+   BOXES
+========================= */
+
+function renderBoxes(){
+
+  const el=document.getElementById("boxes");
+
+  if(!el) return;
+
+  if(!db.boxes.length){
+
+    el.innerHTML=`
+      <div class="card">
+        <h3>Kutu yok</h3>
+        <p>Admin henüz kutu eklememiş.</p>
+      </div>
+    `;
+
+    return;
+  }
+
+  el.innerHTML=db.boxes.map(box=>`
+
+    <div class="card">
+
+      <h3>📦 ${esc(box.name)}</h3>
+
+      <p style="margin-top:8px">
+        Kutu satın almak için kutuya tıklayın.
+      </p>
+
+      <button class="btn"
+        style="margin-top:12px"
+        onclick="showBox(${box.id})">
+        Satın Alma Bilgisi
+      </button>
+
+      ${
+        admin
+        ? `
+          <button
+            class="btn danger"
+            style="margin-top:8px"
+            onclick="deleteBox(${box.id})">
+            Sil
+          </button>
+        `
+        :""
+      }
+
+    </div>
+
+  `).join("");
+}
+
+function showBox(id){
+
+  const box=db.boxes.find(x=>x.id===id);
+
+  if(!box) return;
+
+  const modal=document.getElementById("modal");
+
+  if(!modal) return;
+
+  modal.innerHTML=`
+
+    <div class="modal-box">
+
+      <div class="modal-head">
+
+        <h3>📦 ${esc(box.name)}</h3>
+
+        <button class="close"
+          onclick="closeModal()">×</button>
+
+      </div>
+
+      <p style="color:#aaa;line-height:1.6">
+
+        Satın alma için aşağıdaki Pay komutunu kullanabilirsiniz:
+
+      </p>
+
+      <div class="card" style="margin-top:12px">
+
+        <code>/Pay ${esc(box.pay)}</code>
+
+      </div>
+
+      <p style="margin-top:12px;color:#aaa">
+
+        Lütfen ticket açınız.
+
+      </p>
+
+      <button class="btn"
+        style="margin-top:12px"
+        onclick="window.open('https://discord.gg/VaXeD','_blank')">
+        VaXeD Ticket
+      </button>
+
+    </div>
+  `;
+
+  modal.classList.add("show");
+}
+
+function deleteBox(id){
+
+  if(!admin) return;
+
+  db.boxes=db.boxes.filter(x=>x.id!==id);
+
+  save();
+  renderBoxes();
+
+  toast("Kutu silindi.");
+}
+
+function addBox(){
+
+  if(!admin) return;
+
+  const name=document.getElementById("adminBoxName")?.value.trim();
+  const pay=document.getElementById("adminBoxPay")?.value.trim();
+
+  if(!name || !pay){
+
+    toast("Kutu adı ve Pay adı gerekli.");
+
+    return;
+  }
+
+  db.boxes.push({
+    id:Date.now(),
+    name:name,
+    pay:pay
+  });
+
+  save();
+
+  document.getElementById("adminBoxName").value="";
+  document.getElementById("adminBoxPay").value="";
+
+  renderBoxes();
+  renderAdmin();
+
+  toast("Kutu eklendi.");
+}
+
+/* =========================
+   NIGHT MARKET
+========================= */
+
+function renderNight(){
+
+  const el=document.getElementById("nightMarket");
+
+  if(!el) return;
+
+  const data=[
+    ["yellow","🟡 Sarı","night-yellow"],
+    ["green","🟢 Yeşil","night-green"],
+    ["red","🔴 Kırmızı","night-red"]
+  ];
+
+  el.innerHTML=data.map(x=>`
+
+    <div class="night-box ${x[2]}">
+
+      <h3>${x[1]}</h3>
+
+      ${
+        db.night[x[0]].length
+        ?
+        db.night[x[0]].map((item,i)=>`
+
+          <div class="night-item">
+
+            ${esc(item)}
+
+            ${
+              admin
+              ?
+              `
+                <button
+                  style="float:right"
+                  class="btn danger"
+                  onclick="deleteNightItem('${x[0]}',${i})">
+                  ×
+                </button>
+              `
+              :""
+            }
+
+          </div>
+        `).join("")
+        :
+        "<p>Henüz item eklenmedi.</p>"
+      }
+
+    </div>
+
+  `).join("");
+}
+
+function addNightItem(color){
+
+  if(!admin) return;
+
+  const names={
+    yellow:"Sarı",
+    green:"Yeşil",
+    red:"Kırmızı"
+  };
+
+  const item=prompt(names[color]+" item adı:");
+
+  if(!item) return;
+
+  db.night[color].push(item.trim());
+
+  save();
+  renderNight();
+  renderAdmin();
+
+  toast("Gece pazarı itemi eklendi.");
+}
+
+function deleteNightItem(color,index){
+
+  if(!admin) return;
+
+  db.night[color].splice(index,1);
+
+  save();
+
+  renderNight();
+  renderAdmin();
+
+  toast("Item silindi.");
+}
+
+/* =========================
+   MARKET
+========================= */
+
+function addMarket(){
+
+  if(!requireLogin()) return;
+
+  const ign=document.getElementById("marketIgn").value.trim();
+  const discord=document.getElementById("marketDiscord").value.trim();
+  const item=document.getElementById("marketItem").value.trim();
+  const description=document.getElementById("marketDescription").value.trim();
+
+  if(!ign || !discord || !item){
+
+    toast("IGN, Discord ve item gerekli.");
+
+    return;
+  }
+
+  db.markets.unshift({
+
+    id:Date.now(),
+
+    siteUser:db.current,
+
+    ign:ign,
+    discord:discord,
+    item:item,
+    description:description,
+
+    date:new Date().toLocaleString("tr-TR")
+  });
+
+  save();
+
+  document.getElementById("marketIgn").value="";
+  document.getElementById("marketDiscord").value="";
+  document.getElementById("marketItem").value="";
+  document.getElementById("marketDescription").value="";
+
+  renderMarkets();
+
+  toast("İlan oluşturuldu.");
+}
+
+function renderMarkets(){
+
+  const el=document.getElementById("marketList");
+
+  if(!el) return;
+
+  if(!db.markets.length){
+
+    el.innerHTML=`
+      <div class="card">
+        <h3>Henüz ilan yok.</h3>
+      </div>
+    `;
+
+    return;
+  }
+
+  el.innerHTML=db.markets.map(m=>`
+
+    <div class="market-item">
+
+      <div class="market-top">
+
+        <div>
+          <div class="market-user">
+            👤 ${esc(m.siteUser)}
+          </div>
+
+          <div class="market-meta">
+            IGN: ${esc(m.ign)} · Discord: ${esc(m.discord)}
+          </div>
+        </div>
+
+        <div class="market-meta">
+          ${esc(m.date)}
+        </div>
+
+      </div>
+
+      <h3>📦 ${esc(m.item)}</h3>
+
+      <p style="margin-top:7px;color:#aaa">
+        ${esc(m.description || "Açıklama yok.")}
+      </p>
+
+      ${
+        admin || m.siteUser===db.current
+        ?
+        `
+          <button
+            class="btn danger"
+            style="margin-top:10px"
+            onclick="deleteMarket(${m.id})">
+            İlanı Sil
+          </button>
+        `
+        :""
+      }
+
+    </div>
+
+  `).join("");
+}
+
+function deleteMarket(id){
+
+  if(!admin){
+
+    const item=db.markets.find(x=>x.id===id);
+
+    if(!item || item.siteUser!==db.current) return;
+  }
+
+  db.markets=db.markets.filter(x=>x.id!==id);
+
+  save();
+  renderMarkets();
+
+  toast("İlan silindi.");
+}
+
+/* =========================
+   TRADE
+========================= */
+
+function addTrade(){
+
+  if(!requireLogin()) return;
+
+  const ign=document.getElementById("tradeIgn").value.trim();
+  const discord=document.getElementById("tradeDiscord").value.trim();
+  const give=document.getElementById("tradeGive").value.trim();
+  const want=document.getElementById("tradeWant").value.trim();
+
+  if(!ign || !discord || !give || !want){
+
+    toast("Tüm alanları doldur.");
+
+    return;
+  }
+
+  db.trades.unshift({
+
+    id:Date.now(),
+
+    siteUser:db.current,
+
+    ign:ign,
+    discord:discord,
+    give:give,
+    want:want,
+
+    date:new Date().toLocaleString("tr-TR")
+  });
+
+  save();
+
+  document.getElementById("tradeIgn").value="";
+  document.getElementById("tradeDiscord").value="";
+  document.getElementById("tradeGive").value="";
+  document.getElementById("tradeWant").value="";
+
+  renderTrades();
+
+  toast("Trade ilanı oluşturuldu.");
+}
+
+function renderTrades(){
+
+  const el=document.getElementById("tradeList");
+
+  if(!el) return;
+
+  if(!db.trades.length){
+
+    el.innerHTML=`
+      <div class="card">
+        <h3>Henüz trade ilanı yok.</h3>
+      </div>
+    `;
+
+    return;
+  }
+
+  el.innerHTML=db.trades.map(t=>`
+
+    <div class="market-item">
+
+      <div class="market-top">
+
+        <div>
+
+          <div class="market-user">
+            👤 ${esc(t.siteUser)}
+          </div>
+
+          <div class="market-meta">
+            IGN: ${esc(t.ign)} · Discord: ${esc(t.discord)}
+          </div>
+
+        </div>
+
+        <div class="market-meta">
+          ${esc(t.date)}
+        </div>
+
+      </div>
+
+      <p>
+        🟢 <b>Veriyor:</b> ${esc(t.give)}
+      </p>
+
+      <p style="margin-top:7px">
+        🔴 <b>İstiyor:</b> ${esc(t.want)}
+      </p>
+
+      ${
+        admin || t.siteUser===db.current
+        ?
+        `
+          <button
+            class="btn danger"
+            style="margin-top:10px"
+            onclick="deleteTrade(${t.id})">
+            Sil
+          </button>
+        `
+        :""
+      }
+
+    </div>
+
+  `).join("");
+}
+
+function deleteTrade(id){
+
+  if(!admin){
+
+    const item=db.trades.find(x=>x.id===id);
+
+    if(!item || item.siteUser!==db.current) return;
+  }
+
+  db.trades=db.trades.filter(x=>x.id!==id);
+
+  save();
+  renderTrades();
+
+  toast("Trade ilanı silindi.");
+}
+
+/* =========================
+   CHAT
+========================= */
+
+function setChannel(channel){
+
+  if(!CHANNELS.includes(channel)) return;
+
+  currentChannel=channel;
+
+  const h=document.getElementById("chatHeader");
+
+  if(h) h.textContent="# "+channel;
+
+  renderChat();
+}
+
+function sendChat(){
+
+  if(!requireLogin()) return;
+
+  const input=document.getElementById("chatInput");
+
+  if(!input) return;
+
+  const text=input.value.trim();
+
+  if(!text) return;
+
+  if(db.banned.includes(db.current)){
+
+    toast("Siteden yasaklandın.");
+
+    return;
+  }
+
+  if(db.muted.includes(db.current)){
+
+    toast("Sohbette susturuldun.");
+
+    return;
+  }
+
+  db.chat[currentChannel].push({
+
+    id:Date.now(),
+
+    user:db.current,
+
+    text:text,
+
+    time:new Date().toLocaleTimeString("tr-TR",{
+      hour:"2-digit",
+      minute:"2-digit"
+    })
+  });
+
+  save();
+
+  input.value="";
+
+  renderChat();
+}
+
+function renderChat(){
+
+  const el=document.getElementById("chatMessages");
+
+  if(!el) return;
+
+  const messages=db.chat[currentChannel] || [];
+
+  if(!messages.length){
+
+    el.innerHTML=`
+      <div style="color:#777">
+        #${esc(currentChannel)} kanalında henüz mesaj yok.
+      </div>
+    `;
+
+    return;
+  }
+
+  el.innerHTML=messages.map(m=>`
+
+    <div class="chat-message">
+
+      <span class="chat-name">
+        ${esc(m.user)}
+      </span>
+
+      <span class="chat-time">
+        ${esc(m.time)}
+      </span>
+
+      <div>
+        ${esc(m.text)}
+      </div>
+
+      ${
+        admin
+        ?
+        `
+          <button
+            class="btn danger"
+            style="padding:4px 7px;font-size:11px;margin-top:4px"
+            onclick="deleteChatMessage('${currentChannel}',${m.id})">
+            Sil
+          </button>
+        `
+        :""
+      }
+
+    </div>
+
+  `).join("");
+
+  el.scrollTop=el.scrollHeight;
+}
+
+function deleteChatMessage(channel,id){
+
+  if(!admin) return;
+
+  db.chat[channel]=db.chat[channel].filter(m=>m.id!==id);
+
+  save();
+  renderChat();
+
+  toast("Mesaj silindi.");
+}
+
+/* =========================
+   PLAYERS
+========================= */
+
+function renderPlayers(){
+
+  const el=document.getElementById("playersList");
+
+  if(!el) return;
+
+  if(!db.users.length){
+
+    el.innerHTML=`
+      <div class="card">
+        <h3>Henüz oyuncu yok.</h3>
+      </div>
+    `;
+
+    return;
+  }
+
+  el.innerHTML=db.users.map(u=>`
+
+    <div class="card">
+
+      <h3>👤 ${esc(u.username)}</h3>
+
+      <p>
