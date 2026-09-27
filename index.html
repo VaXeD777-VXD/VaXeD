@@ -50,6 +50,29 @@ main {
   border-radius: 18px;
   padding: 22px;
 }
+<script>
+function copyIP() {
+  navigator.clipboard.writeText("kolichub.net")
+    .then(function () {
+      alert("✅ IP kopyalandı: kolichub.net");
+    })
+    .catch(function () {
+      alert("📋 Sunucu IP: kolichub.net");
+    });
+}
+
+function openDiscord() {
+  window.open(
+    "https://discord.gg/VaXeD",
+    "_blank"
+  );
+}
+
+console.log("VaXeD sitesi aktif!");
+</script>
+
+</body>
+</html>
 
 .hero h1 {
   font-size: 30px;
@@ -108,3 +131,47 @@ button {
   }
 }
 </style>
+</head>
+
+<body>
+
+  <header>
+    <div class="logo">VaXeD</div>
+    <div class="subtitle">KolicHub Community</div>
+  </header>
+
+  <main>
+
+    <section class="hero">
+      <h1>⚡ VaXeD</h1>
+
+      <p>
+        KolicHub topluluk sitesine hoş geldin.
+      </p>
+
+      <div class="server-card">
+        <h2>🎮 Minecraft Sunucusu</h2>
+
+        <div class="server-ip">
+          kolichub.net
+        </div>
+
+        <button onclick="copyIP()">
+          📋 IP Kopyala
+        </button>
+
+        <button onclick="openDiscord()">
+          💬 Discord
+        </button>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>📢 Duyurular</h2>
+
+      <div id="announcements">
+        <p>Henüz duyuru bulunmuyor.</p>
+      </div>
+    </section>
+
+  </main>
