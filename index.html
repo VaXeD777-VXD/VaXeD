@@ -42,3 +42,137 @@
   </main>
 
 </body>
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: #08060d;
+  color: #ffffff;
+  font-family: Arial, sans-serif;
+  min-height: 100vh;
+}
+
+header {
+  background: #100b18;
+  border-bottom: 1px solid #2a1740;
+  padding: 18px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.logo {
+  color: #a855f7;
+  font-size: 25px;
+  font-weight: 800;
+}
+
+.subtitle {
+  color: #999;
+  font-size: 13px;
+  margin-top: 4px;
+}
+
+main {
+  width: 100%;
+  max-width: 1100px;
+  margin: auto;
+  padding: 18px;
+}
+
+.hero {
+  background: linear-gradient(
+    135deg,
+    #190b29,
+    #0b0810
+  );
+
+  border: 1px solid #452064;
+  border-radius: 18px;
+  padding: 22px;
+  margin-bottom: 18px;
+}
+
+.hero h1 {
+  font-size: 30px;
+  margin-bottom: 10px;
+}
+
+.hero p {
+  color: #aaa;
+  line-height: 1.6;
+}
+
+.server-card {
+  background: #0d0913;
+  border: 1px solid #302044;
+  border-radius: 15px;
+  padding: 18px;
+  margin-top: 18px;
+}
+
+.server-card h2 {
+  margin-bottom: 12px;
+}
+
+.server-ip {
+  color: #c084fc;
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 14px;
+}
+
+button {
+  border: 0;
+  border-radius: 10px;
+  padding: 12px 16px;
+  margin: 4px;
+  background: #9333ea;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #a855f7;
+}
+
+.section {
+  background: #0d0913;
+  border: 1px solid #241735;
+  border-radius: 15px;
+  padding: 18px;
+  margin-bottom: 15px;
+}
+
+.section h2 {
+  margin-bottom: 12px;
+}
+
+#announcements {
+  color: #aaa;
+}
+
+@media (max-width: 600px) {
+
+  main {
+    padding: 12px;
+  }
+
+  .hero {
+    padding: 18px;
+  }
+
+  .hero h1 {
+    font-size: 26px;
+  }
+
+  button {
+    width: 100%;
+    margin: 5px 0;
+  }
+
+}
