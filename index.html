@@ -5,24 +5,24 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>VaXeD | KolicHub</title>
 <style>
-*{box-sizing:border-box}body{margin:0;background:#08070d;color:#f5f3ff;font-family:Arial,sans-serif}header{padding:18px;border-bottom:1px solid #29243a;background:#0b0910;position:sticky;top:0;z-index:5}.wrap{max-width:1050px;margin:auto}.brand{font-size:25px;font-weight:900;color:#b56cff}.sub,.muted{color:#aaa5bd;font-size:13px}nav{display:flex;gap:7px;overflow:auto;margin-top:12px}button,.btn{border:1px solid #332947;background:#15111e;color:white;border-radius:10px;padding:10px 13px;font-weight:700;cursor:pointer;text-decoration:none}.primary{background:linear-gradient(135deg,#7c3aed,#a855f7);border:0}.danger{background:#3a1116}.page{display:none}.page.active{display:block}main{padding:22px 14px 90px}.hero,.card{background:#11101a;border:1px solid #29243a;border-radius:16px;padding:18px}.hero{background:linear-gradient(145deg,#1b102c,#0f0d15)}h1{font-size:32px;margin:0 0 8px}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin-top:15px}.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}input,textarea{width:100%;padding:12px;margin:7px 0;background:#0b0a10;border:1px solid #332947;border-radius:10px;color:white}textarea{min-height:90px}.item{display:flex;justify-content:space-between;gap:10px;border-top:1px solid #29243a;padding:12px 0}.empty{text-align:center;padding:30px;color:#aaa5bd}.bottom{position:fixed;bottom:0;left:0;right:0;background:#0b0910f2;border-top:1px solid #29243a;display:flex;justify-content:space-around;padding:8px;z-index:10}.bottom button{background:none;border:0;font-size:11px;padding:4px}@media(min-width:700px){.bottom{display:none}}
-.modal-bg{position:fixed;inset:0;background:#000b;display:none;align-items:center;justify-content:center;padding:15px;z-index:20}.modal{background:#12101a;border:1px solid #493266;border-radius:16px;padding:20px;width:min(500px,100%)}
-#toast{display:none;position:fixed;bottom:75px;left:50%;transform:translateX(-50%);background:#181421;border:1px solid #8b5cf6;padding:11px 15px;border-radius:10px;z-index:30}
+*{box-sizing:border-box}body{margin:0;background:#050505;color:#ffffff;font-family:Arial,sans-serif}header{padding:18px;border-bottom:1px solid #222222;background:#090909;position:sticky;top:0;z-index:5}.wrap{max-width:1050px;margin:auto}.brand{font-size:25px;font-weight:900;color:#ffffff}.sub,.muted{color:#aaaaaa;font-size:13px}nav{display:flex;gap:7px;overflow:auto;margin-top:12px}button,.btn{border:1px solid #2a2a2a;background:#111111;color:white;border-radius:10px;padding:10px 13px;font-weight:700;cursor:pointer;text-decoration:none}.primary{background:linear-gradient(135deg,#ffffff,#ffffff);border:0}.danger{background:#3a1116}.page{display:none}.page.active{display:block}main{padding:22px 14px 90px}.hero,.card{background:#0d0d0d;border:1px solid #222222;border-radius:16px;padding:18px}.hero{background:linear-gradient(145deg,#151515,#090909)}h1{font-size:32px;margin:0 0 8px}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin-top:15px}.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}input,textarea{width:100%;padding:12px;margin:7px 0;background:#070707;border:1px solid #2a2a2a;border-radius:10px;color:white}textarea{min-height:90px}.item{display:flex;justify-content:space-between;gap:10px;border-top:1px solid #222222;padding:12px 0}.empty{text-align:center;padding:30px;color:#aaaaaa}.bottom{position:fixed;bottom:0;left:0;right:0;background:#090909f2;border-top:1px solid #222222;display:flex;justify-content:space-around;padding:8px;z-index:10}.bottom button{background:none;border:0;font-size:11px;padding:4px}@media(min-width:700px){.bottom{display:none}}
+.modal-bg{position:fixed;inset:0;background:#000b;display:none;align-items:center;justify-content:center;padding:15px;z-index:20}.modal{background:#12101a;border:1px solid #444444;border-radius:16px;padding:20px;width:min(500px,100%)}
+#toast{display:none;position:fixed;bottom:75px;left:50%;transform:translateX(-50%);background:#111111;border:1px solid #ffffff;padding:11px 15px;border-radius:10px;z-index:30}
 .modal.show{display:block}
 .modal{max-height:90vh;overflow:auto}
-.tag{display:inline-block;padding:4px 8px;border-radius:999px;background:#24183a;color:#d8c3ff;font-size:11px}
-.small{color:#aaa5bd;font-size:12px}
+.tag{display:inline-block;padding:4px 8px;border-radius:999px;background:#202020;color:#ffffff;font-size:11px}
+.small{color:#aaaaaa;font-size:12px}
 
 
-.user-pill{display:inline-flex;align-items:center;gap:6px;border:1px solid #65428d;border-radius:999px;padding:6px 10px;color:#dfccff;font-size:12px;margin-top:8px}
+.user-pill{display:inline-flex;align-items:center;gap:6px;border:1px solid #555555;border-radius:999px;padding:6px 10px;color:#ffffff;font-size:12px;margin-top:8px}
 .color-tabs{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0}
 .color-tabs button{flex:1;min-width:90px}
 .yellow{background:#5a4705;border-color:#d6b52b}
 .green{background:#103b20;border-color:#35a866}
 .red{background:#4a151b;border-color:#d54a59}
-.notice{border-left:3px solid #a855f7;padding:10px 12px;background:#17111f;border-radius:8px;margin:8px 0}
-.timer{font-weight:800;color:#d8c3ff}
-.participants{font-size:12px;color:#aaa5bd}
+.notice{border-left:3px solid #ffffff;padding:10px 12px;background:#141414;border-radius:8px;margin:8px 0}
+.timer{font-weight:800;color:#ffffff}
+.participants{font-size:12px;color:#aaaaaa}
 .winner{color:#b9ffca;font-weight:800}
 
 </style>
@@ -55,7 +55,7 @@
     <div class="card">
       <h3>💬 Discord</h3>
       <div class="actions">
-        <a class="btn primary" href="https://discord.gg/VaXeD" target="_blank">VaXeD</a>
+        <a class="btn primary" href="https://discord.gg/VaXeD" target="_blank">Valeria</a>
         <a class="btn" href="https://discord.gg/koluchub" target="_blank">KolicHub</a>
       </div>
     </div>
@@ -99,6 +99,10 @@
   <div id="tradeList" class="grid"></div>
 </section>
 
+<section id="p-tierlist" class="page">
+<div class="hero"><h1>🏆 Tier List</h1><p>Oyuncu sıralamasına yalnızca admin ekleme yapabilir.</p></div>
+<div id="tierListBox"></div>
+</section>
 <section id="p-players" class="page">
   <h2>👥 Oyuncular</h2>
   <div class="card"><p class="muted">Kayıtlı topluluk üyeleri.</p><div id="playerList"></div></div>
@@ -183,7 +187,11 @@
   <div id="reportList" class="grid"></div>
 </section>
 
-<section id="p-discord" class="page">
+<section id="p-discord" class="page"><div class="card"><h3>🟢 Yunava Discord</h3>
+<p class="muted">Yunava topluluğuna katıl.</p>
+<a class="primary" href="https://discord.gg/rmGw8ssAf" target="_blank" rel="noopener">Yunava Discord'a Katıl</a>
+</div>
+
   <h2>💬 Discord</h2>
   <div class="card">
     <div class="actions">
@@ -222,7 +230,7 @@
 <section id="p-admin" class="page">
   <div class="hero">
     <h1>🛡️ Admin Paneli</h1>
-    <p>Şifre:gizli</p>
+    <p>Şifre: V6559</p>
     <button class="primary" onclick="adminLogin()">Admin Girişi</button>
   </div>
   <div id="adminArea"></div>
@@ -235,17 +243,17 @@
 <div id="toast"></div>
 <div id="bottom" class="bottom"></div>
 <script>
-const KEY='vaxed_kolichub_site_v3', ADMIN_PASSWORD='V6559';
+const KEY='yunava_kolichub_site_v1', ADMIN_PASSWORD='V6559';
 let admin=false,currentUser=null;
 
 let state={
- users:[],announcements:[],
+ users:[],announcements:[],tierlist:[],purchasesOpen:false,
  boxes:[
-  {name:'Gizemli Kutu',icon:'🎁',cmd:['RaveXismc','korkunckamyon']},
-  {name:'Random Kit Kutusu',icon:'🎒',cmd:['RaveXismc','korkunckamyon']},
-  {name:'Kaliteli Kutu',icon:'💎',cmd:['RaveXismc','korkunckamyon']},
-  {name:'Kalitesiz Kutu',icon:'🗑️',cmd:['RaveXismc','korkunckamyon']},
-  {name:'Random Kutu',icon:'🎲',cmd:['RaveXismc','korkunckamyon']}
+  {name:'Gizemli Kutu',icon:'🎁',cmd:[]},
+  {name:'Random Kit Kutusu',icon:'🎒',cmd:[]},
+  {name:'Kaliteli Kutu',icon:'💎',cmd:[]},
+  {name:'Kalitesiz Kutu',icon:'🗑️',cmd:[]},
+  {name:'Random Kutu',icon:'🎲',cmd:[]}
  ],
  night:{yellow:[],green:[],red:[]},
  trades:[],markets:[],reports:[],scammers:[],giveaways:[]
@@ -295,7 +303,7 @@ function go(id){
  if(id==='p-night')showNight('yellow');
  if(id==='p-announcements')renderAnnouncements();
  if(id==='p-giveaway')renderGiveaways();
- if(id==='p-admin')renderAdmin();
+ if(id==='p-admin')renderAdmin();renderTierList();renderRegisteredCount();
  if(id==='p-login')renderAccount();
  if(id==='p-players')renderPlayers();
 }
@@ -348,22 +356,19 @@ function renderAnnouncements(){
  e.innerHTML=state.announcements.map(a=>`<div class="card"><h3>📢 ${esc(a.title)}</h3><p>${esc(a.text)}</p><span class="small">👤 ${esc(a.author)} · ${esc(a.date)}</span></div>`).join('')||'<div class="empty">Henüz duyuru yok.</div>';
 }
 function renderBoxes(){
- document.getElementById('boxes').innerHTML=state.boxes.map((x,i)=>`<div class="card"><h3>${x.icon} ${esc(x.name)}</h3><p class="muted">🎫 Satın alım için VaXeD Ticket açınız.</p><button class="primary" onclick="showBox(${i})">Detayları Gör</button></div>`).join('');
+ const e=document.getElementById('boxes');
+ if(!state.purchasesOpen){
+  e.innerHTML='<div class="card"><h3>🔒 Satın alımlar şuanlık kapalı</h3><p class="muted">Satın alımlar admin tarafından tekrar açılana kadar kapalıdır.</p></div>';
+  return;
+ }
+ e.innerHTML=state.boxes.map((x,i)=>`<div class="card"><h3>${x.icon} ${esc(x.name)}</h3><p class="muted">🎫 Satın alım için VaXeD Ticket açınız.</p><button class="primary" onclick="showBox(${i})">Detayları Gör</button></div>`).join('')||'<div class="empty">Henüz ürün yok.</div>';
 }
 function showBox(i){
  const x=state.boxes[i];
- openModal(`<h2>${x.icon} ${esc(x.name)}</h2><p>🎫 Satın alım için VaXeD Ticket açınız.</p>${x.cmd.map(c=>`<div class="actions"><input value="/Pay ${esc(c)}" readonly><button class="primary" onclick='copyText(${JSON.stringify('/Pay '+c)})'>📋 Kopyala</button></div>`).join('')}<br><button onclick="closeModal()">Kapat</button>`);
+ if(!state.purchasesOpen)return toast('Satın alımlar şuanlık kapalı.');
+ const commands=(x.cmd||[]).filter(Boolean);
+ openModal(`<h2>${x.icon} ${esc(x.name)}</h2><p>🎫 Satın alım için VaXeD Ticket açınız.</p>${commands.length?commands.map(c=>`<div class="actions"><input value="/Pay ${esc(c)}" readonly><button class="primary" onclick='copyText(${JSON.stringify('/Pay '+c)})'>Kopyala</button></div>`).join(''):'<p class="muted">Pay komutu şu an eklenmemiş.</p>'}<p class="muted">Lütfen ticket açınız.<br>Satın alım için VaXeD Ticket açınız.</p><button onclick="closeModal()">Kapat</button>`);
 }
-
-function showNight(color){
- const arr=state.night[color]||[];
- document.getElementById('nightItems').innerHTML=arr.map((x,i)=>`<div class="card"><h3>🌙 ${esc(x.name)}</h3><span class="tag">${color.toUpperCase()}</span><br><br><button class="primary" onclick='showNightItem(${JSON.stringify(color)},${i})'>Ürünü Gör</button></div>`).join('')||'<div class="empty">Bu renkte henüz ürün yok.</div>';
-}
-function showNightItem(color,i){
- const x=state.night[color][i];
- openModal(`<h2>🌙 ${esc(x.name)}</h2><div class="card"><b>${esc(x.pay)}</b><br><button class="primary" onclick='copyText(${JSON.stringify(x.pay)})'>📋 Kopyala</button></div><p class="muted">Lütfen ticket açınız.<br>Satın alım için VaXeD Ticket açınız.</p><button onclick="closeModal()">Kapat</button>`);
-}
-
 function addTrade(){
  if(!currentUser)return toast('Önce giriş yap.');
  openModal(`<h2>🔄 Trade İlanı</h2><input id="ti" placeholder="IGN"><input id="td" placeholder="Discord adı"><input id="tg" placeholder="Verdiğin eşya"><input id="tw" placeholder="İstediğin eşya"><button class="primary" onclick="saveTrade()">İlan Ekle</button>`);
@@ -507,24 +512,76 @@ function saveGiveaway(){
  save();closeModal();renderGiveaways();renderAdmin();go('p-giveaway');toast('Çekiliş oluşturuldu.');
 }
 function addBox(){
- if(admin)openModal(`<h2>📦 Kutu Ekle</h2><input id="bn" placeholder="Kutu adı"><textarea id="bc" placeholder="RaveXismc&#10;korkunckamyon"></textarea><button class="primary" onclick="saveBox()">Ekle</button>`);
+ if(admin)openModal(`<h2>📦 Kutu Ekle</h2><input id="bn" placeholder="Kutu adı"><textarea id="bc" placeholder="&#10;"></textarea><button class="primary" onclick="saveBox()">Ekle</button>`);
 }
 function saveBox(){
  const n=document.getElementById('bn').value.trim(),cmd=document.getElementById('bc').value.split(/\n|,/).map(x=>x.trim().replace(/^\/?Pay\s+/i,'')).filter(Boolean);
  if(!n||!cmd.length)return toast('Kutu adı ve Pay komutu gerekli.');
  state.boxes.push({name:n,icon:'🎁',cmd});save();closeModal();renderBoxes();renderAdmin();toast('Kutu eklendi.');
 }
+
+function renderRegisteredCount(){
+ const e=document.getElementById('registeredCount');
+ if(e)e.textContent=(state.users||[]).length;
+}
+function renderTierList(){
+ const e=document.getElementById('tierListBox');
+ if(!e)return;
+ const list=state.tierlist||[];
+ e.innerHTML=list.length
+ ? list.map(x=>`<div class="card"><h3>${esc(x.name)}</h3><p>Tier: <b>${esc(x.tier)}</b></p></div>`).join('')
+ : '<div class="card"><p class="muted">Henüz admin tarafından oyuncu eklenmedi.</p></div>';
+ renderAdminTierList();
+}
+function renderAdminTierList(){
+ const e=document.getElementById('adminTierList');
+ if(!e)return;
+ const list=state.tierlist||[];
+ e.innerHTML=list.length
+ ? list.map((x,i)=>`<div class="row"><span>${esc(x.name)} — <b>${esc(x.tier)}</b></span><button class="danger" onclick="deleteTier(${i})">Sil</button></div>`).join('')
+ : '<p class="muted">Liste boş.</p>';
+}
+function addTier(){
+ if(!admin)return toast('Sadece admin ekleyebilir.');
+ const name=(document.getElementById('tierName')||{}).value?.trim();
+ const tier=(document.getElementById('tierRank')||{}).value?.trim();
+ if(!name||!tier)return toast('İsim ve tier gir.');
+ state.tierlist=state.tierlist||[];
+ state.tierlist.push({name,tier});
+ save();renderTierList();renderAdminTierList();toast('Tier List oyuncusu eklendi.');
+}
+function deleteTier(i){
+ if(!admin)return;
+ state.tierlist.splice(i,1);
+ save();renderTierList();renderAdminTierList();
+}
 function renderAdmin(){
  const e=document.getElementById('adminArea');
  if(!admin){e.innerHTML='<div class="empty">🔐 Admin girişi gerekli.</div>';return}
  e.innerHTML=`
- <div class="card"><h3>📢 Duyuru</h3><button class="primary" onclick="addAnnouncement()">➕ Duyuru Ekle</button>
+ <div class="card"><h3>🛒 Satın Alımlar</h3><p>${state.purchasesOpen?'🟢 Satın alımlar açık':'🔴 Satın alımlar şuanlık kapalı'}</p><button class="${state.purchasesOpen?'danger':'primary'}" onclick="togglePurchases()">${state.purchasesOpen?'🔒 Satın Alımları Kapat':'🟢 Satın Alımları Aç'}</button></div>
+ <div class="card"><h3>🏆 Tier List Yönetimi</h3>
+<p class="muted">Sadece admin oyuncu ekleyebilir.</p>
+<div class="form">
+<input id="tierName" placeholder="İsim: oyuncu">
+<input id="tierRank" placeholder="Tier (ör. S, A, B)">
+<button class="primary" onclick="addTier()">Oyuncu Ekle</button>
+</div>
+<div id="adminTierList"></div>
+</div>
+<div class="card"><h3>📢 Duyuru</h3><button class="primary" onclick="addAnnouncement()">➕ Duyuru Ekle</button>
  ${state.announcements.map((a,i)=>`<p class="notice"><b>${esc(a.title)}</b><br>${esc(a.text)}<br><button class="danger" onclick="deleteAnnouncement(${i})">Sil</button></p>`).join('')}</div>
  <div class="card" style="margin-top:12px"><h3>🌙 Night Market</h3><button class="primary" onclick="addNightItem()">➕ Ürün Ekle</button><p>Sarı: ${state.night.yellow.length} · Yeşil: ${state.night.green.length} · Kırmızı: ${state.night.red.length}</p></div>
  <div class="card" style="margin-top:12px"><h3>🎁 Çekiliş</h3><button class="primary" onclick="addGiveaway()">➕ Çekiliş Oluştur</button></div>
  <div class="card" style="margin-top:12px"><h3>📦 Kutular</h3><button class="primary" onclick="addBox()">➕ Kutu Ekle</button>${state.boxes.map((x,i)=>`<p>${x.icon} <b>${esc(x.name)}</b> <button class="danger" onclick="removeBox(${i})">Sil</button></p>`).join('')}</div>
  <div class="card" style="margin-top:12px"><h3>📊 Kayıtlar</h3><p>Trade: ${state.trades.length} · Market: ${state.markets.length} · Rapor: ${state.reports.length} · Scammer: ${state.scammers.length} · Çekiliş: ${state.giveaways.length}</p></div>
  <button class="danger" onclick="admin=false;renderAdmin();toast('Admin çıkışı yapıldı.')">Admin Çıkış</button>`;
+}
+function togglePurchases(){
+ if(!admin)return;
+ state.purchasesOpen=!state.purchasesOpen;
+ save();renderBoxes();renderAdmin();
+ toast(state.purchasesOpen?'Satın alımlar açıldı.':'Satın alımlar kapatıldı.');
 }
 function deleteAnnouncement(i){if(admin){state.announcements.splice(i,1);save();renderAnnouncements();renderAdmin()}}
 function removeBox(i){if(admin){state.boxes.splice(i,1);save();renderBoxes();renderAdmin()}}
@@ -547,7 +604,3 @@ setInterval(()=>{if(document.getElementById('p-giveaway').classList.contains('ac
 </script>
 </body>
 </html>
-
-
-
-
